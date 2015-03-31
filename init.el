@@ -9,6 +9,7 @@
 (defvar ecfg-plugin-root (expand-file-name "plugins" ecfg-dir)
   "ecfg directory for static plugins, i.e. not installed with el-get")
 
+(unless (file-directory-p ecfg-plugin-root) (make-directory ecfg-plugin-root 'recursive))
 
 (add-to-list 'load-path ecfg-plugin-root)
 (let ((default-directory ecfg-plugin-root))
@@ -47,3 +48,4 @@ following regexp: \"^[0-9][0-9]-ecfg-\\(.+\\)\.el$\".
 (ecfg-run-init-scripts (expand-file-name "init.d" ecfg-dir))
 
 ;; todo: set title to file-name-nodirectory
+;; todo: autoloads for different modules like ecfg-org.el
