@@ -23,7 +23,8 @@
   (el-get 'sync)
 
   ;; build melpa packages for el-get
-  (el-get-elpa-build-local-recipes))
+  ;; (el-get-elpa-build-local-recipes)
+)
 
 ;; enable git shallow clone to save time and bandwidth
 (setq el-get-git-shallow-clone t)
