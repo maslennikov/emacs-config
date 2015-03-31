@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: migration template
+# key: migrate
+# --
+/**
+ * ${1:Migration description}
+ */
+
+
+var migrationName = '${2:`(buffer-name)`}',
+	migration = db.migration.findOne({name: migrationName});
+if (!migration) {
+	executeMigration();
+	db.migration.insert({name: migrationName});
+	print('Migration done successfully');
+} else {
+	print('Migration already done');
+}
+
+function executeMigration() {
+$0
+}
+

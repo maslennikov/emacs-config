@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: clog
+# key: clog
+# group: c++
+# contributor: Alexy Maslennikov
+# --
+std::cout << "$1" ${2:<< $3 }<< std::endl;$0

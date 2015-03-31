@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: define var self = this
+# key: defself
+# group: javascript
+# contributor: Alexy Maslennikov
+# --
+var self = this;$0

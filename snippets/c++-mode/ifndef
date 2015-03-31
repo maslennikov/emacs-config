@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: ifndef guard
+# key: ifndefguard
+# group: c++
+# --
+#ifndef ${1:_`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H_}
+#define $1
+
+`yas/selected-text`$0
+
+#endif /* $1 */

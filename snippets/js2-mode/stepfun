@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: stepfun
+# key: stepfun
+# --
+Step.${1:throwIfError}(function(err$2) {
+$0
+})

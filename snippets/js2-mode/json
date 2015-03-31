@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: jQuery getJSON()
+# key: json
+# group: jquery
+# contributor: David Miller <david@deadpansincerity.com>
+# --
+\$.getJSON("${1:url/to/hit}", function(${2:data}) {$0}); 

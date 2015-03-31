@@ -1,0 +1,33 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: declare a controller
+# key: defcontroller
+# contributor: Alexy Maslennikov
+# --
+'use strict';
+
+var BaseController = require('../base').BaseController,
+	Steppy = require('twostep').Steppy,
+	_ = require('underscore'),
+	util = require('util');
+
+module.exports.${1:MyController} = Controller;
+
+
+function Controller() {
+	BaseController.apply(this);
+	this.respondType = '${2:json}';${3:
+	this.${4:view} = ${5:''};}
+
+	this.validateRules = {$0};
+}
+
+Controller._meta = {
+	inject: {}${6:,
+	route: {
+		url: '$7',
+		method: '${8:get}'${9:,
+		middleware: null}
+	}}
+};
+
+util.inherits(Controller, BaseController);

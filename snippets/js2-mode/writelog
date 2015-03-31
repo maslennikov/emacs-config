@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: write a log message
+# key: clog
+# group: javascript
+# contributor: Alexy Maslennikov
+# --
+console.log('$1'$2);$0

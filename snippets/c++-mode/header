@@ -1,0 +1,15 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: source code legal metadata
+# key: legalheader
+# group: c++
+# --
+/**
+ * ADC Automotive Distance Control Systems GmbH
+ *
+ * @package   SVS100
+ * @copyright `(format-time-string "%Y")` Continental Corporation
+ * @author    A. Maslennikov <alexey.maslennikov@continental-corporation.com>${1:
+ *
+ * @brief ${2:Brief description}}
+ */
+$0

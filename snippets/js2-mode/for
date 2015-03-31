@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode:snippet -*-
+# name: for loop
+# key: for
+# contributor: David Miller <david@deadpansincerity.com>
+# --
+for(var i = 0; i < ${1:something}.${2:length}; i++) {
+$0
+}

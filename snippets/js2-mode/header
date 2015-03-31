@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: File header
+# key: header
+# contributor: Alexy Maslennikov
+# --
+/**
+ * @fileoverview ${1:description}
+ */
+
+$0

@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: anonymous function expression
+# key: lambda
+# expand-env: ((yas/indent-line 'auto))
+# contributor: Alexy Maslennikov
+# --
+function(${1:args}) {
+$0
+}

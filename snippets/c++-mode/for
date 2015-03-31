@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode:snippet -*-
+# name: for loop
+# key: for
+# group: c++
+# --
+for ($1; $2; $3) {
+  `yas/selected-text`$0
+}

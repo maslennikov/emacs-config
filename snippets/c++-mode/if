@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: if construction
+# --
+if (${1:condition}) {
+`yas/selected-text`$0
+}

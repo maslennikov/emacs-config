@@ -1,0 +1,68 @@
+#+TITLE: Emacs Config
+
+* Foreword
+
+I started using Emacs long ago. As usually it is, everything began with having a
+single =~/.emacs= file and pasting into it some random code snippets found
+across the web.
+
+After discovering some bulky plugins the =~/.emacs.d= was discovered and
+separate plugin files and directories moved there. But the glue code grew, some
+own functions were developed, and managing a single =~/.emacs= became awkward.
+
+Even after splitting the initialization code into separete modules, it was still
+a long time having the =~/.emacs.d= in dropbox shared across multiple
+workstations and containing all the necessary plugins cherry-picked from the
+net.
+
+The major problem was the unmaintainability of these plugin
+versions. Approximately at this time the =package.el= grew its popularity and
+the whole stuff started looking promising. Another reason to move towards
+network-based package deployment was my wish to switch from the dropbox solution
+to github because at my new working place firewall didn't allow dropbox
+access: Having all the third-party plugins in git looked a bit unwieldy.
+
+The tipping point came when I discovered an amazing
+[[https://github.com/xiaohanyu/oh-my-emacs][Oh My Emacs]]. It proved the concept
+of maintaining an extremely elaborate Emacs configuration in a transparent and
+manageable way. And though I prefer to keep my config looking like code and not
+like the document (still, I am totally a fan of the =org-mode=), the =ome= has
+heavily influenced the current state of things.
+
+
+* Installation
+
+Currently, neither the =~/.emacs= file, nor =~/.emacs.d= are not replaced by the
+config. The idea behind that is to keep the configuration sources as far as
+possible from automatic updates from the Emacs and its plugins side.
+
+All the artifacts created by different emacs modes (i.e. =recentf= history) are
+encouraged to be stored in =~/.emacs.d=, all the user-specific settings (like
+=custom-set-variables= stuff set by emacs configuration tool) are encouraged to
+stay in the =~/.emacs=.
+
+Anyways, there is always a possibility to experiment with =user-emacs-directory=
+and with =custom-file=.
+
+To start using the =ecf=, clone the repo into =~/.emacs.config= or anywhere you
+find more appropriate.
+
+#+BEGIN_SRC sh
+git clone https://github.com/maslennikov/emacs-config.git ~/.emacs.config
+#+END_SRC
+
+To load the =ecf= during the Emacs start-up, put as a first line into your
+=~/.emacs= the following:
+
+#+BEGIN_SRC emacs-lisp
+(load-file "~/.emacs.config/init.el")
+#+END_SRC
+
+It can take a few minutes, all depending on your internet connection speed, for
+the initial start-up to download and set all the required packages.
+
+
+* Known issues
+
+While experimenting with =el-get-bundle= and =:after= hooks, be sure to remove
+cached stuff from =el-get/bundle-init= directory.

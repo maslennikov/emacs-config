@@ -1,0 +1,13 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: define a function
+# key: defun
+# group: c++
+# expand-env: ((yas/indent-line 'fixed))
+# --
+${1:/**
+ * 
+ */}
+${2:void} ${3:funcname}(${4:args}) 
+{
+$0
+}

@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: Backbone View
+# key: view
+# group: backbone
+# contributor: David Miller <david@deadpansincerity.com>
+# --
+var ${1:View} = Backbone.View.extend({
+    tagName: $2,
+    className: $3
+    el: \$("$4"),
+    template: \$("$5"),
+
+    initialize: function(){
+        _.bindAll(this, "render");
+    },
+
+    render: function(){
+        $(this.el).html(this.template.tmpl());
+        return this
+    },
+    $0
+
+});

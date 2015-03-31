@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: anonymous function expression
+# key: lambda
+# group: c++
+# expand-env: ((yas/indent-line 'auto))
+# --
+[&](${1:args}) ${2:-> ${3:returns} }{$0}

@@ -1,0 +1,16 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: requirejs module template
+# key: requirejsModule
+# contributor: Alexy Maslennikov
+# --
+'use strict';
+
+
+${1:define}([
+	//modules
+], function(
+	//imports
+) {
+$0
+});
+

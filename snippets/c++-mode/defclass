@@ -1,0 +1,16 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: declare a class
+# key: defclass
+# group: c++
+# expand-env: ((yas/indent-line 'fixed))
+# --
+${1:/**
+ * 
+ */
+}class ${2: `(file-name-nondirectory (file-name-sans-extension (buffer-name)))`}
+{
+public:
+    $2() {}
+    virtual ~$2() {}
+    $0
+};

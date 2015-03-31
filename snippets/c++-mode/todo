@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: todo message
+# key: todoo
+# --
+//TODO[maslennikov] $0

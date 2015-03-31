@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: inspectobj
+# key: inspectobj
+# --
+require('util').inspect($1, false, null)$0

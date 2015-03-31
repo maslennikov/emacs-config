@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: define a prototype method
+# key: defmeth
+# group: c++
+# expand-env: ((yas/indent-line 'fixed))
+# --
+${1:void} ${2:Classname}::${3:methodname}(${4:args}) 
+{
+$0
+};

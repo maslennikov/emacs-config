@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: define a prototype method
+# key: defmeth
+# expand-env: ((yas/indent-line 'fixed))
+# --
+${1:/**
+ * 
+ */}
+${2:Controller}.prototype.${3:methodname} = function(${4:args}) {
+$0
+};

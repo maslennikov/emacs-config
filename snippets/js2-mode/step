@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: step
+# key: makestep
+# --
+flowy(
+function() {
+$0			
+}
+);

@@ -1,0 +1,21 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: declare a c++-header file
+# key: defheader
+# group: c++
+# expand-env: ((yas/indent-line 'fixed))
+# --
+legalheader$0
+
+#ifndef ${1:_`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-name))))`_H_}
+#define $1
+
+//#include <string.h>
+
+
+namespace ${2:Namespace} {
+
+
+
+} //namespace $2
+
+#endif /* $1 */
