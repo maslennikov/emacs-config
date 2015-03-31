@@ -44,14 +44,14 @@ stay in the =~/.emacs=.
 Anyways, there is always a possibility to experiment with =user-emacs-directory=
 and with =custom-file=.
 
-To start using the =ecf=, clone the repo into =~/.emacs.config= or anywhere you
+To start using the =ecfg=, clone the repo into =~/.emacs.config= or anywhere you
 find more appropriate.
 
 #+BEGIN_SRC sh
 git clone https://github.com/maslennikov/emacs-config.git ~/.emacs.config
 #+END_SRC
 
-To load the =ecf= during the Emacs start-up, put as a first line into your
+To load the =ecfg= during the Emacs start-up, put as a first line into your
 =~/.emacs= the following:
 
 #+BEGIN_SRC emacs-lisp
