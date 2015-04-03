@@ -61,51 +61,6 @@
       (ecfg--reformat-region (point) (mark))
     (ecfg--reformat-region (point-min) (point-max))))
 
-(defun ecfg--move-text-vertically (arg)
-  "Moves curent line or lines covered by selection region ARG lines down"
-  (defun ecfg--move-selection-vertically ()
-    (ecfg--normalize-region-point-mark t)
-    (let ((start-column (current-column))
-          (start (line-beginning-position)))
-      (exchange-point-and-mark)
-      (let* ((end-column (current-column))
-             (end (line-end-position))
-             (text (delete-and-extract-region start end)))
-        (ecfg--move-line-vertically)
-
-        (set-mark (point))
-        (insert text)
-        (exchange-point-and-mark)
-        (setq deactivate-mark nil))))
-
-  (defun ecfg--move-line-vertically ()
-    (let ((column (current-column)))
-      (beginning-of-line)
-      (when (or (> arg 0) (not (bobp)))
-        (end-of-line)
-        (when (or (< arg 0) (not (eobp)))
-          ;; when eob, and we're in eol, it works like we have one more line down there
-          (beginning-of-line)
-          (set-mark (point))
-          (forward-line arg)
-          (transpose-lines 0)
-          (when (> arg 0) (forward-line arg))))
-      (move-to-column column)))
-
-  (if (and transient-mark-mode mark-active)
-      (ecfg--move-selection-vertically)
-    (ecfg--move-line-vertically)))
-
-(defun ecfg-move-text-down (arg)
-  "Move region (transient-mark-mode active) or current line arg lines down"
-  (interactive "*p")
-  (ecfg--move-text-vertically arg))
-
-(defun ecfg-move-text-up (arg)
-  "Move region (transient-mark-mode active) or current line arg lines up"
-  (interactive "*p")
-  (ecfg--move-text-vertically (- arg)))
-
 (defun ecfg-toggle-comment-on-lines ()
   "Commenting out all lines that include region, or current line"
   (interactive)

@@ -8,6 +8,7 @@
   (ecfg--setup-variables)
   (ecfg--setup-coding-systems)
   (ecfg--setup-backup)
+  (ecfg--setup-drag-stuff)
   (ecfg--setup-uniquify)
   (ecfg--setup-autocomplete)
   (ecfg--setup-yasnippet)
@@ -76,6 +77,12 @@
    auto-save-list-file-prefix (expand-file-name
                                "auto-save-list/save-"
                                user-emacs-directory)))
+
+(defun ecfg--setup-drag-stuff ()
+  (ecfg-install drag-stuff
+    (autoload 'drag-stuff-up "drag-stuff")
+    (autoload 'drag-stuff-down "drag-stuff")
+    ))
 
 (defun ecfg--setup-uniquify ()
   ;;uniquify is distributed with emacs

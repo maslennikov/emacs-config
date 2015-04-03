@@ -39,8 +39,8 @@
 
 (global-set-key (kbd "s-k") 'ecfg-kill-current-line)
 (global-set-key (kbd "<S-return>") 'ecfg-end-of-line-and-indent)
-(global-set-key [C-S-up] 'ecfg-move-text-up)
-(global-set-key [C-S-down] 'ecfg-move-text-down)
+(global-set-key [C-S-up] 'drag-stuff-up)
+(global-set-key [C-S-down] 'drag-stuff-down)
 
 (global-set-key (kbd "\C-c i") 'ecfg-reformat-text)
 (global-set-key (kbd "C-/") 'ecfg-toggle-comment-on-lines)
