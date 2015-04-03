@@ -85,13 +85,13 @@
           (dired-directory dired-directory "%b"))))
 
 (defun ecfg--setup-markdown ()
-  (el-get-bundle markdown-mode))
+  (ecfg-install markdown-mode))
 
 (defun ecfg--setup-autocomplete ()
   ;; todo: there is another module called pos-tip
   ;; todo: see how autocomplete in OME is implemented
 
-  (el-get-bundle auto-complete
+  (ecfg-install auto-complete
    ;; ;; Load the default configuration
    ;; (require 'auto-complete-config)
    ;; (ac-config-default)
@@ -124,7 +124,7 @@
 
 (defun ecfg--setup-yasnippet ()
   ;; todo: see how yasnippet in OME is set-up
-  (el-get-bundle yasnippet
+  (ecfg-install yasnippet
 
    (eval-after-load "yasnippet"
      '(progn
@@ -135,7 +135,7 @@
 (defun ecfg--setup-emacs-nav ()
   ;; todo find something better
 
-  (el-get-bundle nav
+  (ecfg-install nav
        (nav-disable-overeager-window-splitting)))
 
 
@@ -153,10 +153,10 @@
 
   (ido-mode t)
 
-  (el-get-bundle ido-ubiquitous
+  (ecfg-install ido-ubiquitous
    (ido-ubiquitous-mode))
 
-  (el-get-bundle smex
+  (ecfg-install smex
    (setq smex-save-file (locate-user-emacs-file "smex.hist"))
    (global-set-key (kbd "M-x") 'smex)
    (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -165,7 +165,7 @@
 
 
 (defun ecfg--setup-ffip ()
-  (el-get-bundle find-file-in-project
+  (ecfg-install find-file-in-project
    (eval-after-load "find-file-in-project"
     '(progn
        (mapc (lambda (val) (add-to-list 'ffip-patterns val))
@@ -173,7 +173,7 @@
 
 (defun ecfg--setup-autopair ()
   ;; todo: look at cua mode?
-  (el-get-bundle autopair
+  (ecfg-install autopair
       (autopair-global-mode)
       (setq autopair-blink nil)
       (setq autopair-pair-criteria 'always)

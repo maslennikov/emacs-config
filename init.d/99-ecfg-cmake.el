@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (defun ecfg-cmake-module-init ()
-  (el-get-bundle cmake-mode
+  (ecfg-install cmake-mode
    :before (autoload 'cmake-mode "cmake-mode" "Editing cmake files" t)
    :after
    (add-to-list 'auto-mode-alist '("CMakeLists\\.txt$" . cmake-mode))

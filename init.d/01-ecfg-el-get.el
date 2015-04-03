@@ -36,3 +36,13 @@
 ;; tell el-get to look into local customizations for every package into
 ;; `~/.emacs.d/init-<package>.el'
 (setq el-get-user-package-directory user-emacs-directory)
+
+
+;; Defining the helper macro to be used instead of `el-get-bundle'. The reason
+;; behind it is to get rid of `el-get-bundle' caching of the init code in the
+;; `el-get-bundle-init-directory'
+(defmacro ecfg-install (package &rest hook)
+  "Install the given PACKAGE via el-get running an optional
+after-install HOOK forms"
+  `(let ((el-get-sources '((:name ,package :after (progn ,@hook)))))
+     (el-get 'sync ',package)))

@@ -16,14 +16,14 @@
   (column-number-mode t))
 
 (defun ecfg--setup-sml-modeline ()
-  (el-get-bundle sml-modeline
+  (ecfg-install sml-modeline
    (require 'sml-modeline)
    (setq sml-modeline-borders '("[" . "]"))
    (setq sml-modeline-len 14)
    (sml-modeline-mode t)))
 
 (defun ecfg--setup-tabbar ()
-  (el-get-bundle tabbar
+  (ecfg-install tabbar
    (tabbar-mode t)
    (tabbar-mwheel-mode 0)
 
@@ -56,7 +56,7 @@
 
 
 (defun ecfg--setup-color-theme ()
-  (el-get-bundle color-theme
+  (ecfg-install color-theme
    (ecfg--light-color-theme))
 )
 

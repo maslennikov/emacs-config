@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (defun ecfg-sgml-module-init ()
-  (el-get-bundle zencoding-mode)
+  (ecfg-install zencoding-mode)
   (add-hook 'sgml-mode-hook 'ecfg--sgml-hook))
 
 ;; sgml - general markup mode

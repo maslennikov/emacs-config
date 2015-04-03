@@ -4,7 +4,7 @@
   ;;WARNING: if el-get fails to clone the org-mode git repo, try to place the
   ;;following mirror url into 'el-get/el-get/recipes/org-mode.rcp':
   ;;http://repo.or.cz/org-mode.git
-  (el-get-bundle org-mode
+  (ecfg-install org-mode
    ;; todo: move to keybindings file
    (global-set-key "\C-cl" 'org-store-link)
    (global-set-key "\C-ca" 'org-agenda)

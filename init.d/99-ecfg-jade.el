@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (defun ecfg-jade-module-init ()
-  (el-get-bundle jade-mode
+  (ecfg-install jade-mode
    (add-to-list 'auto-mode-alist '("\\.styl$" . stylus-mode))
    (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
    (add-hook 'jade-mode-hook 'ecfg--jade-hook))
