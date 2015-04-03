@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
+;;;###autoload
 (defun ecfg-org-module-init ()
   ;;WARNING: if el-get fails to clone the org-mode git repo, try to place the
   ;;following mirror url into 'el-get/el-get/recipes/org-mode.rcp':
@@ -21,6 +22,8 @@
         ;; `org-set-emph-re` directly, instead I set `org-emphasis-alist` to
         ;; itself and let the customize interface call the handler for me.
         (custom-set-variables `(org-emphasis-alist ',org-emphasis-alist))))))
+;;;###autoload (ecfg-auto-module "\\.org$" org)
+;;;###autoload (ecfg-auto-module "\\.org.txt$" org)
 
 
 (defun ecfg--org-hook ()

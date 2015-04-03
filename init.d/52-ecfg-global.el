@@ -1,3 +1,5 @@
+;; setting-up global modes and core plugins
+;;
 ;; -*- lexical-binding: t -*-
 
 (defun ecfg-global-module-init ()

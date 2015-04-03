@@ -1,5 +1,6 @@
+;; defining global keybindings
+;;
 ;; -*- lexical-binding: t -*-
-
 
 ;;window navigation M-<arrow>
 (windmove-default-keybindings 'meta)

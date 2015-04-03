@@ -1,3 +1,5 @@
+;; configuring the look and feel
+;;
 ;; -*- lexical-binding: t -*-
 
 (defun ecfg-gui-module-init ()

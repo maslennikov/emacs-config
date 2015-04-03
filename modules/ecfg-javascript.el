@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
+;;;###autoload
 (defun ecfg-javascript-module-init ()
   (ecfg-install js2-mode
    (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -22,6 +23,7 @@
 
    (add-hook 'js2-mode-hook 'ecfg--js-hook)))
 
+;;;###autoload (ecfg-auto-module "\\.js$" javascript)
 
 (defun ecfg--manually-bounce-indent ()
   (interactive)

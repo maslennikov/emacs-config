@@ -1,9 +1,14 @@
 ;; -*- lexical-binding: t -*-
 
+;;;###autoload
 (defun ecfg-cpp-module-init ()
   (add-hook 'c-mode-hook 'ecfg--cpp-hook)
   (add-hook 'c++-mode-hook 'ecfg--cpp-hook))
 
+;;;###autoload (ecfg-auto-module "\\.c$" cpp)
+;;;###autoload (ecfg-auto-module "\\.cpp$" cpp)
+;;;###autoload (ecfg-auto-module "\\.h$" cpp)
+;;;###autoload (ecfg-auto-module "\\.hpp$" cpp)
 
 (defun ecfg--cpp-hook ()
     (setq c-basic-offset 4)

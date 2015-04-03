@@ -1,3 +1,5 @@
+;; compatibility with older emacs versions
+;;
 ;; -*- lexical-binding: t -*-
 
 ;; Some workaround for emacs version < 24.0, thanks Silthanis@github.

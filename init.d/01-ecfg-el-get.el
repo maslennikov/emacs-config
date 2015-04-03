@@ -4,7 +4,7 @@
 (add-to-list 'load-path (expand-file-name "el-get/el-get" user-emacs-directory))
 
 ;; (let ((package-load-list '((el-get t))))
-  ;; (package-initialize))
+;; (package-initialize))
 
 ;; forbid package.el initializing anything automatically since we use el-get
 (setq package-enable-at-startup nil)
@@ -24,7 +24,7 @@
 
   ;; build melpa packages for el-get
   ;; (el-get-elpa-build-local-recipes)
-)
+  )
 
 ;; enable git shallow clone to save time and bandwidth
 (setq el-get-git-shallow-clone t)

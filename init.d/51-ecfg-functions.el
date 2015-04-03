@@ -1,7 +1,6 @@
-;; -*- lexical-binding: t -*-
-
 ;; global function definitions
-
+;;
+;; -*- lexical-binding: t -*-
 
 (defun ecfg-end-buffer-with-blank-line ()
   (interactive)
@@ -45,8 +44,8 @@
   (if (ecfg--is-mark-mode)
       (clipboard-kill-ring-save (point) (mark))
     (save-excursion
-	  (back-to-indentation)
-	  (clipboard-kill-ring-save (point) (line-end-position)))))
+      (back-to-indentation)
+      (clipboard-kill-ring-save (point) (line-end-position)))))
 
 (defun ecfg-reformat-text ()
   (defun ecfg--reformat-region (start end)
@@ -67,20 +66,20 @@
   (defun ecfg--move-selection-vertically ()
     (ecfg--normalize-region-point-mark t)
     (let ((start-column (current-column))
-		  (start (line-beginning-position)))
-	  (exchange-point-and-mark)
-	  (let* ((end-column (current-column))
-			 (end (line-end-position))
-			 (text (delete-and-extract-region start end)))
-		(ecfg--move-line-vertically)
+          (start (line-beginning-position)))
+      (exchange-point-and-mark)
+      (let* ((end-column (current-column))
+             (end (line-end-position))
+             (text (delete-and-extract-region start end)))
+        (ecfg--move-line-vertically)
 
-		(set-mark (point))
-		(insert text)
-		(exchange-point-and-mark)
-		(setq deactivate-mark nil))))
+        (set-mark (point))
+        (insert text)
+        (exchange-point-and-mark)
+        (setq deactivate-mark nil))))
 
   (defun ecfg--move-line-vertically ()
-	(let ((column (current-column)))
+    (let ((column (current-column)))
       (beginning-of-line)
       (when (or (> arg 0) (not (bobp)))
         (end-of-line)
@@ -91,7 +90,7 @@
           (forward-line arg)
           (transpose-lines 0)
           (when (> arg 0) (forward-line arg))))
-	  (move-to-column column)))
+      (move-to-column column)))
 
   (if (and transient-mark-mode mark-active)
       (ecfg--move-selection-vertically)
@@ -150,8 +149,8 @@
   "Read regexp arg for interactive usage"
     (read-regexp
      (concat prompt
-	     (if (and default (> (length default) 0))
-		 (format " (default \"%s\"): " default) ": "))
+         (if (and default (> (length default) 0))
+         (format " (default \"%s\"): " default) ": "))
      default nil))
 
 (defun ecfg-unhighlight-all ()
