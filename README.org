@@ -64,5 +64,9 @@ the initial start-up to download and set all the required packages.
 
 * Known issues
 
-While experimenting with =el-get-bundle= and =:after= hooks, be sure to remove
-cached stuff from =el-get/bundle-init= directory.
+While experimenting with =el-get=, =el-get-bundle=, and recipes, be sure to
+remember about the cached stuff:
+- =el-get/bundle-init/=: contains passed to =el-get-bundle= init code;
+- =el-get/.status=: contains cached recipes for all installed packages;
+- =el-get/.loaddefs.el=: contains autoloads from all installed packages - can be
+  large. See also =el-get-use-autoloads= customizable variable.

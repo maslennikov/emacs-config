@@ -12,7 +12,6 @@
   (ecfg--setup-uniquify)
   (ecfg--setup-autocomplete)
   (ecfg--setup-yasnippet)
-  (ecfg--setup-emacs-nav)
   ;; (ecfg--setup-tramp)
   (ecfg--setup-ido)
   (ecfg--setup-ffip)
@@ -139,13 +138,6 @@
      '(progn
         (setq yas-snippet-dirs (expand-file-name "snippets" ecfg-dir))
         (yas-reload-all)))))
-
-
-(defun ecfg--setup-emacs-nav ()
-  ;; todo find something better
-
-  (ecfg-install nav
-       (nav-disable-overeager-window-splitting)))
 
 
 (defun ecfg--setup-ido ()

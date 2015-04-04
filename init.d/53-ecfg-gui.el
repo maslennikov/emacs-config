@@ -8,6 +8,7 @@
   (ecfg--setup-basic-gui)
   (ecfg--setup-sml-modeline)
   (ecfg--setup-tabbar)
+  (ecfg--setup-emacs-nav)
   (ecfg--setup-color-theme))
 
 
@@ -55,6 +56,14 @@
        ((member current-ext '("c" "cpp" "cc")) '("C/C++"))
        ((member current-ext '("h" "hpp" "hh")) '("C/C++ headers"))
        (t (tabbar-buffer-groups))))))
+
+
+(defun ecfg--setup-emacs-nav ()
+  ;; todo find something better
+  (ecfg-install nav
+   (autoload 'nav-toggle "nav" "toggling nav window" t)
+   (eval-after-load "nav"
+     '(nav-disable-overeager-window-splitting))))
 
 
 (defun ecfg--setup-color-theme ()
