@@ -27,6 +27,7 @@
 
 (defun ecfg--setup-tabbar ()
   (ecfg-install tabbar
+   (require 'tabbar)
    (tabbar-mode t)
    (tabbar-mwheel-mode 0)
 

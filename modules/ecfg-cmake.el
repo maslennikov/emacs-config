@@ -3,6 +3,7 @@
 ;;;###autoload
 (defun ecfg-cmake-module-init ()
   (ecfg-install cmake-mode
+   (autoload 'cmake-mode "cmake-mode" "Editing cmake files" t)
    (add-to-list 'auto-mode-alist '("CMakeLists\\.txt$" . cmake-mode))
    (add-to-list 'auto-mode-alist '("\\.cmake$" . cmake-mode))
    (add-hook 'cmake-mode-hook 'ecfg--cmake-hook)))

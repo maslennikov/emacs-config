@@ -22,8 +22,12 @@
         ;; `org-set-emph-re` directly, instead I set `org-emphasis-alist` to
         ;; itself and let the customize interface call the handler for me.
         (custom-set-variables `(org-emphasis-alist ',org-emphasis-alist))))))
-;;;###autoload (ecfg-auto-module "\\.org$" org)
-;;;###autoload (ecfg-auto-module "\\.org.txt$" org)
+
+;; autoloading org-mode immediately to override standard org-loaddefs
+;;;###autoload (ecfg-org-module-init)
+;; this we don't need
+;; ;;;###autoload (ecfg-auto-module "\\.org$" org)
+;;; ;;###autoload (ecfg-auto-module "\\.org.txt$" org)
 
 
 (defun ecfg--org-hook ()

@@ -12,6 +12,7 @@
 (define-key minibuffer-local-map (kbd "C-q") 'minibuffer-keyboard-quit)
 (global-set-key (kbd "s-f") 'find-file)
 (global-set-key (kbd "C-s-f") 'find-file-in-project)
+(global-set-key (kbd "<C-s-268632070>") 'find-file-in-project)
 (global-set-key (kbd "s-F") 'recentf-open-files)
 (global-set-key (kbd "s-b") 'switch-to-buffer)
 (global-set-key (kbd "C-s-b") 'ibuffer)

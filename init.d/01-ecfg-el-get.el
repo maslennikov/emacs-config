@@ -26,16 +26,25 @@
   ;; (el-get-elpa-build-local-recipes)
   )
 
-;; enable git shallow clone to save time and bandwidth
-(setq el-get-git-shallow-clone t)
+(setq
+ ;; enable git shallow clone to save time and bandwidth
+ el-get-git-shallow-clone t
+
+ ;; tell el-get to look into local customizations for every package into
+ ;; `~/.emacs.d/init-<package>.el'
+ el-get-user-package-directory user-emacs-directory
+
+ ;; making the el-get logging verbose
+ ;; WARNING: makes init slower
+ ;; el-get-verbose t
+
+ ;; turning them for core moduels off
+ el-get-use-autoloads nil
+ )
 
 ;; Sometimes, we need to experiment with our own recipe, or override the
 ;; default el-get recipe to get around bugs.
 (add-to-list 'el-get-recipe-path (expand-file-name "el-get-recipes" ecfg-dir))
-
-;; tell el-get to look into local customizations for every package into
-;; `~/.emacs.d/init-<package>.el'
-(setq el-get-user-package-directory user-emacs-directory)
 
 
 ;; Defining the helper macro to be used instead of `el-get-bundle'. The reason

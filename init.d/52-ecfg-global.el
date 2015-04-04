@@ -133,7 +133,7 @@
 (defun ecfg--setup-yasnippet ()
   ;; todo: see how yasnippet in OME is set-up
   (ecfg-install yasnippet
-
+   (autoload 'yas-minor-mode "yasnippet" "turns yasnippet minor mode on" t)
    (eval-after-load "yasnippet"
      '(progn
         (setq yas-snippet-dirs (expand-file-name "snippets" ecfg-dir))
@@ -155,6 +155,7 @@
   (ido-mode t)
 
   (ecfg-install ido-ubiquitous
+   (require 'ido-ubiquitous)
    (ido-ubiquitous-mode))
 
   (ecfg-install smex
@@ -167,6 +168,7 @@
 
 (defun ecfg--setup-ffip ()
   (ecfg-install find-file-in-project
+   (autoload 'find-file-in-project "find-file-in-project" "triggers ffip search" t)
    (eval-after-load "find-file-in-project"
     '(progn
        (mapc (lambda (val) (add-to-list 'ffip-patterns val))
@@ -181,10 +183,6 @@
       (setq autopair-skip-whitespace 'chomp)))
 
 (defun ecfg--setup-nuke-trailing-whitespace ()
-  ;; (eval-after-load "nuke-trailing-whitespace"
-  ;;   '(mapc (lambda (val)
-  ;;            (add-to-list 'nuke-trailing-whitespace-always-major-modes val))
-  ;;          '(python-mode cmake-mode javascript-mode js2-mode css-mode org-mode)))
   (add-hook 'before-save-hook 'whitespace-cleanup))
 
 (defun ecfg--setup-recentf ()

@@ -7,9 +7,14 @@
   "ecfg root directory")
 (defvar ecfg-plugin-dir (expand-file-name "plugins" ecfg-dir)
   "ecfg directory for static plugins, i.e. not installed with el-get")
+(defvar ecfg-user-dir (expand-file-name "ecfg" user-emacs-directory)
+  "ecfg user directory, mainly for generated stuff")
 
 (unless (file-directory-p ecfg-plugin-dir)
   (make-directory ecfg-plugin-dir 'recursive))
+
+(unless (file-directory-p ecfg-user-dir)
+  (make-directory ecfg-user-dir 'recursive))
 
 (add-to-list 'load-path ecfg-plugin-dir)
 (let ((default-directory ecfg-plugin-dir))
@@ -77,9 +82,12 @@ auto-mode-alist to trigger the autoload of the module."
 (require 'autoload)
 
 (let* ((ecfg-module-dir (expand-file-name "modules" ecfg-dir))
-       (generated-autoload-file (expand-file-name "loaddefs.el" ecfg-module-dir)))
+       (generated-autoload-file (expand-file-name "loaddefs.el" ecfg-user-dir)))
 
-  (add-to-list 'load-path ecfg-module-dir)
+  ;; directory containing autoloads should be included because loaddefs has
+  ;; relative paths
+  (add-to-list 'load-path ecfg-user-dir)
+  ;; (add-to-list 'load-path ecfg-module-dir)
 
   (if (file-exists-p generated-autoload-file)
       ;; already been there, just load loaddefs
