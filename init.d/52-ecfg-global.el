@@ -16,7 +16,6 @@
   (ecfg--setup-ido)
   (ecfg--setup-ffip)
   (ecfg--setup-autopair)
-  (ecfg--setup-markdown)
   (ecfg--setup-nuke-trailing-whitespace)
   (ecfg--setup-recentf)
 
@@ -92,8 +91,6 @@
           "%f"
           (dired-directory dired-directory "%b"))))
 
-(defun ecfg--setup-markdown ()
-  (ecfg-install markdown-mode))
 
 (defun ecfg--setup-autocomplete ()
   ;; todo: there is another module called pos-tip
