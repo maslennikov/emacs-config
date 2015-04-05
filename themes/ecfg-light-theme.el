@@ -1,4 +1,5 @@
 ;; based on github.com/bbatsov/solarized-emacs
+;; see also github.com/chriskempson/tomorrow-theme
 ;;
 ;; -*- lexical-binding: t -*-
 
@@ -150,10 +151,10 @@ providing a clue if it IS-DARK theme."
        (hi-black-b (:foreground ,fg-hc :background ,bg-base :weight bold))
        (hi-black-hb (:foreground ,fg-hc :background ,bg-hc :weight bold))
        (hi-green (:background ,(ecfg--lc green 0.25)))
-       (hi-green-b (:foreground ,green :weight bold :background ,(ecfg--lc green 0.25)))
+       (hi-green-b (:foreground ,green :weight bold))
        (hi-blue (:background ,(ecfg--lc blue 0.25)))
-       (hi-blue-b (:foreground ,blue :weight bold :background ,(ecfg--lc blue 0.25)))
-       (hi-red-b (:foreground ,red :weight bold :background ,(ecfg--lc red 0.25)))
+       (hi-blue-b (:foreground ,blue :weight bold))
+       (hi-red-b (:foreground ,red :weight bold))
        (hi-yellow (:background ,(ecfg--lc yellow 0.25)))
        (hi-pink (:background ,(ecfg--lc violet 0.25)))
 
