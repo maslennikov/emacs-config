@@ -3,6 +3,8 @@
 ;; Entry init script for Emacs configuration set-up `ecfg'
 ;;
 
+;; (message ">>> init start: %s" (format-time-string "%S.%3N"))
+
 (defvar ecfg-dir (file-name-directory (or load-file-name (buffer-file-name)))
   "ecfg root directory")
 (defvar ecfg-plugin-dir (expand-file-name "plugins" ecfg-dir)
@@ -36,22 +38,43 @@ named `ecfg-MODULENAME-module-init' if it's defined.
       (message "No module init-hook found: %s" init-hook))))
 
 
-(defun ecfg-run-init-scripts (dir)
-  "Loads every script in the given DIR thats name matches the
-following regexp: \"^[0-9][0-9]-ecfg-\\(.+\\)\.el$\".
+(defun ecfg-run-init-scripts (files)
+  "Loads every file listed in FILES thats name matches the
+following regexp: \".*ecfg-\\(.+\\)\.el$\".
 "
-  (let ((regexp "^\\([0-9][0-9]-\\)?ecfg-\\(.+\\)\\.el$"))
-    (dolist (filename (directory-files dir))
+  (let ((regexp ".*ecfg-\\(.+\\)\\.el$"))
+    (dolist (filename files)
       (when (string-match regexp filename)
-        (ecfg-load-module (expand-file-name filename dir)
-                          (match-string 2 filename))))))
+        (ecfg-load-module (expand-file-name filename)
+                          (match-string 1 filename))))))
 
 
 ;;; Loading core initialization scripts
+;;;
+;;; Core initialization scripts are divided into i-modules and w-modules.
+;;; I-modules is the core stuff emacs needs right from the very beginning - from
+;;; the init phase. W-modules are the core emacs components loading of which can
+;;; be deferred until the emacs window is set-up. This is done with the purpose
+;;; of providing the user with as fast visual feedback as possible.
 
-(ecfg-run-init-scripts (expand-file-name "init.d" ecfg-dir))
+;; loading the i-modules
+(ecfg-run-init-scripts
+ (directory-files (expand-file-name "init.d" ecfg-dir) t "^i-"))
+
+;; adding hook to defer loading of w-modules
+(add-hook 'window-setup-hook (lambda ()
+   (ecfg-run-init-scripts
+    (directory-files (expand-file-name "init.d" ecfg-dir) t "^w-"))
+   ;; (message ">>> init end: %s" (format-time-string "%S.%3N"))
+   ))
+
 
 ;;; Loading additional modules
+;;;
+;;; Extension modules, usually corresponding to the specific emacs major-modes
+;;; (e.g. js2-mode). Their load is handled by autoloads. Normally, such a module
+;;; exports its entry function as an autoload and then via the autoload comment
+;;; registers itself into the `auto-mode-alist' via `ecfg-auto-module'.
 
 (defmacro ecfg-auto-module (pattern module)
   "Autoload helper for the ecfg-modules. Utilizes the
@@ -93,7 +116,7 @@ auto-mode-alist to trigger the autoload of the module."
       ;; already been there, just load loaddefs
       (load-file generated-autoload-file)
     ;; making the first run, churn up all modules to trigger el-get installs
-    (ecfg-run-init-scripts ecfg-module-dir)
+    (ecfg-run-init-scripts (directory-files ecfg-module-dir t))
     (update-directory-autoloads ecfg-module-dir)))
 
 ;; todo: set title to file-name-nodirectory
