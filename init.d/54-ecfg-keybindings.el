@@ -24,11 +24,6 @@
 (global-set-key (kbd "s-s") 'save-buffer)
 (global-set-key (kbd "s-S") 'write-file)
 
-(global-set-key (kbd "<C-M-right>") 'tabbar-forward)
-(global-set-key (kbd "<C-M-left>") 'tabbar-backward)
-(global-set-key (kbd "<C-M-up>") 'tabbar-backward-group)
-(global-set-key (kbd "<C-M-down>") 'tabbar-forward-group)
-
 (global-set-key [?\C-z] 'undo)
 (global-set-key [?\C-w] 'backward-delete-char)
 (global-set-key [?\M-w] 'backward-kill-word)

@@ -7,7 +7,6 @@
 
   (ecfg--setup-basic-gui)
   (ecfg--setup-sml-modeline)
-  (ecfg--setup-tabbar)
   (ecfg--setup-emacs-nav)
   (ecfg--setup-color-theme))
 
@@ -24,40 +23,6 @@
    (setq sml-modeline-borders '("[" . "]"))
    (setq sml-modeline-len 14)
    (sml-modeline-mode t)))
-
-(defun ecfg--setup-tabbar ()
-  (ecfg-install tabbar
-   (require 'tabbar)
-   (tabbar-mode t)
-   (tabbar-mwheel-mode 0)
-
-   (eval-after-load "tabbar"
-     '(setq
-       tabbar-separator (quote (0.7))
-       tabbar-buffer-list-function 'ecfg--tabbar-buffer-list-function
-       tabbar-buffer-groups-function 'ecfg--tabbar-buffer-groups))
-
-   (add-hook 'nav-mode-hook (lambda () (tabbar-local-mode nil))))
-
-  (defvar ecfg--tabbar-ignore-buffers '("^\s*\\*"))
-
-  (defun ecfg--tabbar-buffer-list-function ()
-    (remove-if
-     (lambda (buffer)
-       ;; Always include the current buffer.
-       (and (not (eq (current-buffer) buffer))
-            (loop for regex in ecfg--tabbar-ignore-buffers
-                  thereis (string-match regex (buffer-name buffer)))))
-     (buffer-list)))
-
-  ;; combine .c and .cpp files together, .h - separately
-  (defun ecfg--tabbar-buffer-groups ()
-    (let ((current-ext (file-name-extension (or (buffer-file-name) ""))))
-      (cond
-       ((member current-ext '("c" "cpp" "cc")) '("C/C++"))
-       ((member current-ext '("h" "hpp" "hh")) '("C/C++ headers"))
-       (t (tabbar-buffer-groups))))))
-
 
 (defun ecfg--setup-emacs-nav ()
   ;; todo find something better
