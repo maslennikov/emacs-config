@@ -3,29 +3,6 @@
 ;; -*- lexical-binding: t -*-
 
 (defun ecfg-core-module-init ()
-  (ecfg--setup-compatibility)
-  (ecfg--setup-variables)
-  (ecfg--setup-coding-systems)
-  (ecfg--setup-backup)
-)
-
-
-(defun ecfg--setup-compatibility ()
-  ;; Some workaround for emacs version < 24.0, thanks Silthanis@github.
-  (if (< emacs-major-version 24)
-      (defun file-name-base (&optional filename)
-        "Return the base name of the FILENAME: no directory, no extension.
-FILENAME defaults to `buffer-file-name'."
-        (file-name-sans-extension
-         (file-name-nondirectory (or filename (buffer-file-name))))))
-
-  (when (version< emacs-version "24.3")
-    (el-get 'sync '(cl-lib))
-    (add-to-list 'load-path
-                 (expand-file-name "el-get/cl-lib" user-emacs-directory))))
-
-
-(defun ecfg--setup-variables ()
 
 ;;; GUI
   (setq-default inhibit-startup-screen t)
@@ -73,27 +50,17 @@ FILENAME defaults to `buffer-file-name'."
   ;; set lang to enable Chinese display in shell-mode
   (setenv "LANG" "en_US.UTF-8")
 
-;;; Misc
-  (setq-default grep-find-template
-   "find <D> <X> -type f <F> -print0 | xargs -0 grep <C> -nH -e <R>")
+;;; Coding systems
+  (set-default-coding-systems 'utf-8)
+  (prefer-coding-system 'windows-1251)
+  (prefer-coding-system 'utf-8)
 
-  ;; subword mode everywhere
-  (global-subword-mode t)
-
-  ;; auto-revert everything
+;;; auto-revert everything
   (global-auto-revert-mode 1)
   (setq auto-revert-check-vc-info t)
 
-  (fset 'yes-or-no-p 'y-or-n-p))
+;;; Backups
 
-
-(defun ecfg--setup-coding-systems ()
-  (set-default-coding-systems 'utf-8)
-  (prefer-coding-system 'windows-1251)
-  (prefer-coding-system 'utf-8))
-
-
-(defun ecfg--setup-backup ()
   ;;Change backup behavior to save in a directory,
   ;;not in a miscellany of files all over the place.
   (setq
@@ -106,4 +73,14 @@ FILENAME defaults to `buffer-file-name'."
    ;; make-backup-files nil)
    auto-save-default nil
    auto-save-list-file-prefix (expand-file-name
-                               "auto-save-list/save-" user-emacs-directory)))
+                               "auto-save-list/save-" user-emacs-directory))
+
+
+;;; Misc
+  (setq-default grep-find-template
+   "find <D> <X> -type f <F> -print0 | xargs -0 grep <C> -nH -e <R>")
+
+  ;; subword mode everywhere
+  (global-subword-mode t)
+  (fset 'yes-or-no-p 'y-or-n-p)
+)
