@@ -65,8 +65,13 @@
       '(progn
          (add-to-list 'company-begin-commands 'backward-delete-char)
          (setq
-          company-idle-delay 0.3
-          company-minimum-prefix-length 2)
+          company-minimum-prefix-length 2
+          ;;something universally applied
+          company-backends '((company-capf
+                              :with
+                              company-dabbrev-code
+                              company-keywords)
+                             company-dabbrev))
 
          ;; using it instead of `company-complete-common'
          (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
