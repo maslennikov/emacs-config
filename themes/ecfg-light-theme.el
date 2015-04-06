@@ -238,8 +238,9 @@ providing a clue if it IS-DARK theme."
 
 
 ;;;; compilation
-       (compilation-info (:foreground ,fg-lc :underline nil :bold nil))
+       (compilation-info (:foreground ,blue :underline nil :bold nil))
        (compilation-info-face (:foreground ,blue :underline nil))
+       (compilation-line-number (:foreground ,fg-lc))
        (compilation-error (:inherit error :underline nil))
        (compilation-error-face (:foreground ,red : :underline nil))
        (compilation-warning (:inherit warning :underline nil))
