@@ -55,3 +55,17 @@
 after-install HOOK forms"
   `(let ((el-get-sources '((:name ,package :after (progn ,@hook)))))
      (el-get 'sync ',package)))
+
+(defmacro ecfg-with-local-autoloads (&rest body)
+  "Ecexutes BODY after building (if not present) and loading the
+autoloads in the `default-directory'. The reason behind this is
+not using the standard el-get autoloads. Sometimes, for large
+packages, it's too awkward to configure autoloads manually in the
+hooks of `ecfg-install'."
+  `(let ((loaddefs (expand-file-name "ecfg-local-loaddefs.el" default-directory)))
+    (unless (file-exists-p loaddefs)
+      (let ((generated-autoload-file loaddefs))
+        (message "ECFG: Generating local autoloads: %s" loaddefs)
+        (update-directory-autoloads default-directory)))
+    (load-file loaddefs)
+    ,@body))

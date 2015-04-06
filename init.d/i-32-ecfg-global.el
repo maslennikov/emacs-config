@@ -54,31 +54,24 @@
   ;; (icomplete-mode t) ;ido handles this already
 
 ;;; Basic completion-at-point setup
-  (add-to-list 'completion-styles 'substring)
+  ;; (add-to-list 'completion-styles 'substring)
   (setq completion-cycle-threshold 5)
 
   (ecfg-install company-mode
-   ;; generating autoloads manually since we don't use el-get's
-   (let ((loaddefs (expand-file-name "ecfg-company-loaddefs.el" default-directory)))
-     (unless (file-exists-p loaddefs)
-       (let ((generated-autoload-file loaddefs))
-         (update-directory-autoloads default-directory)))
-     (load-file loaddefs))
+   (ecfg-with-local-autoloads
+    (autoload 'company-complete "company" nil t)
 
-   (autoload 'company-complete "company" nil t)
+    (eval-after-load "company"
+      '(progn
+         (add-to-list 'company-begin-commands 'backward-delete-char)
+         (setq
+          company-idle-delay 0.3
+          company-minimum-prefix-length 2)
 
-   (eval-after-load "company"
-     '(progn
-        (add-to-list 'company-begin-commands 'backward-delete-char)
-        (setq
-         company-idle-delay 0
-         company-minimum-prefix-length 2)
-
-        ;; using it instead of `company-complete-common'
-        (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-        ;; not turning it on until the first usage (is it ok?)
-        (global-company-mode)))
-   ))
+         ;; using it instead of `company-complete-common'
+         (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+         ;; not turning it on until the first usage (is it ok?)
+         (global-company-mode))))))
 
 
 (defun ecfg--setup-yasnippet ()
