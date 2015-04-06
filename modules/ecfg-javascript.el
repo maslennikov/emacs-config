@@ -32,12 +32,20 @@
     (js2-indent-line)))
 
 (defun ecfg--js-hook ()
-  (setq ac-sources
-        (append ac-sources
-                '(ac-source-yasnippet
-                  ac-source-words-in-buffer
-                  ac-source-words-in-same-mode-buffers
-                  ac-source-files-in-current-dir)))
+  ;; (setq ac-sources
+  ;;       (append ac-sources
+  ;;               '(ac-source-yasnippet
+  ;;                 ac-source-words-in-buffer
+  ;;                 ac-source-words-in-same-mode-buffers
+  ;;                 ac-source-files-in-current-dir)))
+
+  (set
+   (make-local-variable 'company-backends)
+   '((company-dabbrev-code
+      company-keywords
+      company-dabbrev
+      company-yasnippet)))
+
   (yas-minor-mode)
   (local-set-key (kbd "C-j") (kbd "<return>"))
   (local-set-key (kbd "<s-tab>") 'ecfg--manually-bounce-indent))

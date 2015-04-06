@@ -87,8 +87,9 @@
 
 ;;; Completion
 
-  ;; todo explore auto-complete stuff
+  ;; hippie expand is dabbrev expand on steroids
   (global-set-key (kbd "M-/") 'hippie-expand)
+  (global-set-key (kbd "<C-tab>") 'company-complete)
 
 
 ;;; Font size

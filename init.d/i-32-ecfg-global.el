@@ -51,37 +51,34 @@
   ;; todo: see how autocomplete in OME is implemented
 
   ;; use icomplete in minibuffer
-  (icomplete-mode t)
+  ;; (icomplete-mode t) ;ido handles this already
 
-  (ecfg-install auto-complete
-   ;; ;; Load the default configuration
-   ;; (require 'auto-complete-config)
-   ;; (ac-config-default)
-   ;; ;; Make sure we can find the dictionaries
-   ;; (add-to-list 'ac-dictionary-directories
-   ;;              (expand-file-name "auto-complete/dict" ecfg-plugin-root))
-   (global-auto-complete-mode t)
+;;; Basic completion-at-point setup
+  (add-to-list 'completion-styles 'substring)
+  (setq completion-cycle-threshold 5)
 
-   (setq
-    ac-comphist-file (locate-user-emacs-file "ac-comphist.hist")
-    ac-auto-start 2 ;; start completion after 2 characters of a word
-    ac-auto-show-menu 0.5
-    ac-ignore-case t)
+  (ecfg-install company-mode
+   ;; generating autoloads manually since we don't use el-get's
+   (let ((loaddefs (expand-file-name "ecfg-company-loaddefs.el" default-directory)))
+     (unless (file-exists-p loaddefs)
+       (let ((generated-autoload-file loaddefs))
+         (update-directory-autoloads default-directory)))
+     (load-file loaddefs))
 
-   ;; when to trigger auto-complete
-   (setq ac-trigger-commands
-         '(self-insert-command
-           delete-backward-char
-           backward-delete-char
-           autopair-backspace
-           backward-delete-char-untabify))
+   (autoload 'company-complete "company" nil t)
 
-   ;; define keybindings
-   (setq ac-use-menu-map t)
-   (define-key ac-menu-map "\C-n" 'ac-next)
-   (define-key ac-menu-map "\C-p" 'ac-previous)
-   (define-key ac-menu-map (kbd "<return>") 'ac-complete)
-   (define-key ac-mode-map (kbd "<C-tab>") 'auto-complete)))
+   (eval-after-load "company"
+     '(progn
+        (add-to-list 'company-begin-commands 'backward-delete-char)
+        (setq
+         company-idle-delay 0
+         company-minimum-prefix-length 2)
+
+        ;; using it instead of `company-complete-common'
+        (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+        ;; not turning it on until the first usage (is it ok?)
+        (global-company-mode)))
+   ))
 
 
 (defun ecfg--setup-yasnippet ()

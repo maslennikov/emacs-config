@@ -141,7 +141,7 @@ providing a clue if it IS-DARK theme."
        (show-paren-match-face (:background ,blue :foreground ,bg-base))
        (show-paren-mismatch-face (:background ,orange :foreground ,bg-base))
 
-       (highlight (:background ,(ecfg--lc yellow)))
+       (highlight (:background ,(ecfg--lc yellow 0.25)))
        (lazy-highlight (:foreground ,fg-base :background ,(ecfg--lc orange 0.25)))
        (isearch (:foreground ,bg-base :background ,orange))
        (isearch-fail (:foreground ,fg-base :background ,(ecfg--lc red 0.25)))
@@ -188,6 +188,18 @@ providing a clue if it IS-DARK theme."
        (ac-gtags-selection-face (:background ,(ecfg--lc blue) :foreground ,(ecfg--hc blue)))
        (ac-yasnippet-candidate-face (:background ,bg-hc :foreground ,yellow))
        (ac-yasnippet-selection-face (:background ,(ecfg--lc yellow) :foreground ,(ecfg--hc yellow)))
+
+       (company-template-field (:background ,yellow :foreground ,bg-hc))
+       (company-tooltip (:background ,bg-hc :foreground ,cyan))
+       (company-tooltip-selection (:background ,(ecfg--lc cyan 0.25)))
+       (company-tooltip-mouse (:background ,(ecfg--hc cyan) :foreground ,(ecfg--lc cyan)))
+       (company-tooltip-common (:inherit company-tooltip :foreground ,fg-hc :underline t))
+       (company-tooltip-common-selection (:inherit company-tooltip-selection :foreground ,fg-hc :underline t))
+       (company-tooltip-annotation (:foreground ,fg-hc :background ,bg-hc))
+       (company-scrollbar-fg (:foreground ,bg-base :background ,fg-base))
+       (company-scrollbar-bg (:background ,bg-hc :foreground ,cyan))
+       (company-preview (:background ,bg-hc :foreground ,cyan))
+       (company-preview-common (:foreground ,fg-hc :underline t))
 
 ;;;; popup
        (popup-face (:background ,bg-hc :foreground ,fg-base))
