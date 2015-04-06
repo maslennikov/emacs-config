@@ -13,6 +13,5 @@
 ;;;###autoload (ecfg-auto-module "\\.jade$" jade)
 
 (defun ecfg--jade-hook ()
-  (subword-mode)
   (setq tab-width 4)
   (setq comment-start "//-"))

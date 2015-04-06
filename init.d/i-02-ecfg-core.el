@@ -26,6 +26,8 @@ FILENAME defaults to `buffer-file-name'."
 
 
 (defun ecfg--setup-variables ()
+
+;;; GUI
   (setq-default inhibit-startup-screen t)
 
   ;; we don't need menubar (execpt OSX), toolbar nor scrollbar
@@ -35,23 +37,54 @@ FILENAME defaults to `buffer-file-name'."
   (dolist (mode '(tool-bar-mode scroll-bar-mode))
     (when (fboundp mode) (funcall mode -1)))
 
-
-  (delete-selection-mode)
+;;; Killing
   (setq-default x-select-enable-primary t)
+  (delete-selection-mode t)
+  (setq kill-whole-line t)
+    ;; mac has troubles with "pasteboard doesn't contain valid data"
+  ;; (setq save-interprogram-paste-before-kill t)
 
+;;; Indenting
   (setq-default tab-width 4)
   (setq-default standard-indent 4)
-  (setq kill-whole-line t)
   (setq-default indent-tabs-mode nil)
   (setq-default fill-column 80)
 
-  (setq-default grep-find-template "find <D> <X> -type f <F> -print0 | xargs -0 -e grep <C> -nH -e <R>")
+;;; Whitespace
+  ;; always add new line to the end of a file
+  (setq require-final-newline t)
+  ;; fixing trailing whitespace
+  (add-hook 'before-save-hook 'whitespace-cleanup)
 
-  ;mac has troubles with "pasteboard doesn't contain valid data"
-  ;; (setq save-interprogram-paste-before-kill t)
-  (fset 'yes-or-no-p 'y-or-n-p)
+;;; Shell-mode settings
+  (unless (eq system-type 'windows-nt)
+    (setq explicit-shell-file-name "/bin/bash")
+    (setq shell-file-name "/bin/bash"))
+  ;; always insert at the bottom
+  (setq comint-scroll-to-bottom-on-input t)
+  ;; no duplicates in command history
+  (setq comint-input-ignoredups t)
+  ;; what to run when i press enter on a line above the current prompt
+  (setq comint-get-old-input (lambda () ""))
+  ;; max shell history size
+  (setq comint-input-ring-size 1000)
+  ;; show all in emacs interactive output
+  (setenv "PAGER" "cat")
+  ;; set lang to enable Chinese display in shell-mode
+  (setenv "LANG" "en_US.UTF-8")
+
+;;; Misc
+  (setq-default grep-find-template
+   "find <D> <X> -type f <F> -print0 | xargs -0 grep <C> -nH -e <R>")
+
+  ;; subword mode everywhere
+  (global-subword-mode t)
+
+  ;; auto-revert everything
   (global-auto-revert-mode 1)
-  (setq auto-revert-check-vc-info t))
+  (setq auto-revert-check-vc-info t)
+
+  (fset 'yes-or-no-p 'y-or-n-p))
 
 
 (defun ecfg--setup-coding-systems ()

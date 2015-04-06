@@ -2,13 +2,6 @@
 ;;
 ;; -*- lexical-binding: t -*-
 
-(defun ecfg-end-buffer-with-blank-line ()
-  (interactive)
-  (save-excursion
-    (end-of-buffer)
-    (open-line 1)
-    (delete-blank-lines)))
-
 (defun ecfg--is-mark-mode ()
   (and mark-active transient-mark-mode))
 

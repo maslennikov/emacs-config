@@ -7,11 +7,9 @@
   (ecfg--setup-uniquify)
   (ecfg--setup-autocomplete)
   (ecfg--setup-yasnippet)
-  ;; (ecfg--setup-tramp)
   (ecfg--setup-ido)
   (ecfg--setup-ffip)
   (ecfg--setup-autopair)
-  (ecfg--setup-nuke-trailing-whitespace)
   (ecfg--setup-recentf)
 
   ;; getting rid of annoying auto-opened buffers
@@ -31,16 +29,29 @@
 (defun ecfg--setup-uniquify ()
   ;;uniquify is distributed with emacs
   (require 'uniquify)
-  (setq uniquify-buffer-name-style 'forward)
-  (setq frame-title-format
-        '(buffer-file-name
-          "%f"
-          (dired-directory dired-directory "%b"))))
+  (setq
+   uniquify-buffer-name-style 'forward
+
+   ;; The value may be nil, a string, a symbol or a list.
+   ;;
+   ;; A list whose car is a string or list is processed by processing each of
+   ;; the list elements recursively, as separate mode line constructs,and
+   ;; concatenating the results.
+   ;;
+   ;; A list whose car is a symbol is processed by examining the symbol's value,
+   ;; and, if that value is non-nil, processing the cadr of the list
+   ;; recursively; and if that value is nil, processing the caddr of the list
+   ;; recursively.
+   frame-title-format
+   '(buffer-file-name "%b  -  %f" (dired-directory dired-directory "%b"))))
 
 
 (defun ecfg--setup-autocomplete ()
   ;; todo: there is another module called pos-tip
   ;; todo: see how autocomplete in OME is implemented
+
+  ;; use icomplete in minibuffer
+  (icomplete-mode t)
 
   (ecfg-install auto-complete
    ;; ;; Load the default configuration
@@ -87,13 +98,15 @@
   (require 'ido)
 
   (setq
-   ido-save-directory-list-file (locate-user-emacs-file "ido.hist")
    ido-enable-flex-matching t
+   ido-enable-prefix nil
+   ido-enable-case nil
    ido-everywhere t
    ido-create-new-buffer 'always
-   ido-use-filename-at-point 'guess
+   ;; ido-use-filename-at-point 'guess
    ido-confirm-unique-completion nil
-   ido-auto-merge-work-directories-length -1)
+   ;; ido-auto-merge-work-directories-length -1
+   )
 
   (ido-mode t)
 
@@ -125,12 +138,22 @@
       (setq autopair-pair-criteria 'always)
       (setq autopair-skip-whitespace 'chomp)))
 
-(defun ecfg--setup-nuke-trailing-whitespace ()
-  (add-hook 'before-save-hook 'whitespace-cleanup))
 
 (defun ecfg--setup-recentf ()
+  ;; see masteringemacs.org/article/find-files-faster-recent-files-package
   (require 'recentf)
-  (recentf-mode t)
   (setq
    recentf-max-menu-items 25
-   recentf-save-file (locate-user-emacs-file "recentf.hist")))
+   recentf-max-saved-items 50
+   recentf-save-file (locate-user-emacs-file "recentf.hist")
+   ;; clean-up when idling for this many seconds
+   recentf-auto-cleanup 60)
+
+  (recentf-mode t)
+
+  (defun ecfg-ido-recentf-open ()
+    "Use `ido-completing-read' to \\[find-file] a recent file"
+    (interactive)
+    (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+        (message "Opening file...")
+      (message "Aborting"))))

@@ -39,8 +39,5 @@
                   ac-source-words-in-same-mode-buffers
                   ac-source-files-in-current-dir)))
   (yas-minor-mode)
-  (subword-mode)
   (local-set-key (kbd "C-j") (kbd "<return>"))
-  (local-set-key (kbd "<s-tab>") 'ecfg--manually-bounce-indent)
-
-  (add-hook 'local-write-file-hooks 'ecfg-end-buffer-with-blank-line))
+  (local-set-key (kbd "<s-tab>") 'ecfg--manually-bounce-indent))

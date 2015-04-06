@@ -22,7 +22,6 @@
     (local-set-key (kbd "<f8>") 'ecfg--toggle-file)
 
     ;; (setq autopair-pair-criteria 'always)
-    (subword-mode)
 
     (setq ac-sources
           (append ac-sources
@@ -30,7 +29,6 @@
                     ac-source-files-in-current-dir)))
 
     (yas-minor-mode)
-    (add-hook 'local-write-file-hooks 'ecfg-end-buffer-with-blank-line)
     (add-hook 'post-self-insert-hook 'ecfg-two-dots nil t))
 
 
