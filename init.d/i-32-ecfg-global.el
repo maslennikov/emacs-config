@@ -7,8 +7,8 @@
   (ecfg--setup-uniquify)
   (ecfg--setup-autocomplete)
   (ecfg--setup-yasnippet)
-  (ecfg--setup-ido)
-  (ecfg--setup-ffip)
+  ;; (ecfg--setup-ido)
+  (ecfg--setup-helm)
   (ecfg--setup-autopair)
   (ecfg--setup-recentf)
 
@@ -91,6 +91,79 @@
         (yas-reload-all)))))
 
 
+(defun ecfg--setup-helm ()
+  (ecfg-install helm
+   (require 'helm-config)
+   ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+   ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+   ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+   (global-set-key (kbd "C-q") 'helm-command-prefix)
+   (global-unset-key (kbd "C-x c"))
+
+   (ecfg-with-local-autoloads
+    (global-set-key (kbd "M-x") 'helm-M-x)
+    (global-set-key (kbd "s-f") 'helm-find-files)
+    (global-set-key (kbd "s-b") 'helm-mini)
+    (global-set-key (kbd "C-q g") 'ecfg-helm-do-grep-recursive)
+    (global-set-key (kbd "C-q o") 'helm-occur)
+
+    (eval-after-load "helm" '(ecfg--helm-hook))))
+
+;;; set-up projectile
+  (ecfg-install projectile
+   (ecfg-with-local-autoloads
+    (global-set-key (kbd "C-s-f") 'helm-projectile-find-file-dwim)
+    (global-set-key (kbd "<f8>") 'helm-projectile-find-other-file)
+    ;; todo consider using helm-projectile-ag
+    (global-set-key (kbd "<f9>") 'helm-projectile-grep))))
+
+
+(defun ecfg--helm-hook ()
+  "Is called when helm is loaded."
+
+  (projectile-global-mode)
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on)
+
+;;; helm keymap
+  ;; rebind tab to run persistent action
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  ;; make TAB works in terminal
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  ;; list actions using C-z
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
+
+  (helm-autoresize-mode 1)
+;;; helm variables
+  (setq
+   ;; open helm buffer inside current window, not occupy whole other window
+   helm-split-window-in-side-p t
+   ;; move to end or beginning of source when reaching top or bottom of source.
+   ;; helm-move-to-line-cycle-in-source t
+   ;; search for library in `require' and `declare-function' sexp.
+   helm-ff-search-library-in-sexp t
+   ;; scroll 8 lines other window using M-<next>/M-<prior>
+   helm-scroll-amount 8
+   helm-ff-file-name-history-use-recentf t
+   ;; fuzzy matching
+   helm-buffers-fuzzy-matching t
+   helm-recentf-fuzzy-match t
+   helm-display-header-line nil
+   ;; limiting the window height (works with autoresize-mode)
+   helm-autoresize-max-height 35
+   helm-autoresize-min-height 35
+   )
+
+  )
+
+(defun ecfg-helm-do-grep-recursive (&optional non-recursive)
+  "Like `helm-do-grep', but greps recursively by default."
+  (interactive "P")
+  (let* ((current-prefix-arg (not non-recursive))
+         (helm-current-prefix-arg non-recursive))
+    (call-interactively 'helm-do-grep)))
+
+
 (defun ecfg--setup-ido ()
   (require 'ido)
 
@@ -111,21 +184,14 @@
    (require 'ido-ubiquitous)
    (ido-ubiquitous-mode))
 
-  (ecfg-install smex
-   (setq smex-save-file (locate-user-emacs-file "smex.hist"))
-   (global-set-key (kbd "M-x") 'smex)
-   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-   ;; This is your old M-x.
-   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)))
+  ;; (ecfg-install smex
+  ;;  (setq smex-save-file (locate-user-emacs-file "smex.hist"))
+  ;;  (global-set-key (kbd "M-x") 'smex)
+  ;;  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  ;;  ;; This is your old M-x.
+  ;;  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+  )
 
-
-(defun ecfg--setup-ffip ()
-  (ecfg-install find-file-in-project
-   (autoload 'find-file-in-project "find-file-in-project" "triggers ffip search" t)
-   (eval-after-load "find-file-in-project"
-    '(progn
-       (mapc (lambda (val) (add-to-list 'ffip-patterns val))
-             '("*.c" "*.cpp" "*.h" "*.hpp" "*.cmake" "*.s"))))))
 
 (defun ecfg--setup-autopair ()
   ;; todo: look at cua mode?

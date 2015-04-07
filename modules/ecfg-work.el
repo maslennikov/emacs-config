@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 ;;;###autoload
-(defun org-work-module-init ()
+(defun ecfg-work-module-init ()
   ;; (setq ack-command "ack-grep --nocolor --nogroup --ignore-dir=uploads ")
 
   (eval-after-load "grep"

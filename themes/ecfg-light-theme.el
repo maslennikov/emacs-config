@@ -153,7 +153,7 @@ providing a clue if it IS-DARK theme."
        (match (:foreground ,fg-hc :background ,match-lc-bg))
        (isearch (:foreground ,bg-base :background ,match-hc-bg))
        (isearch-fail (:foreground ,fg-base :background ,(ecfg--lc red)))
-       (lazy-highlight (:foreground ,fg-base :background ,match-lc-bg))
+       (lazy-highlight (:inherit match :background unspecified :foreground unspecified))
 
 ;;;; hi-lock-mode
        (hi-black-b (:foreground ,fg-hc :background ,bg-base :weight bold))
@@ -268,50 +268,40 @@ providing a clue if it IS-DARK theme."
        (compilation-warning-face (:foreground ,orange))
 
 ;;;; helm
-       ;; These probably needs tweaking.
-       ;; (helm-apt-deinstalled (:foreground ,fg-lc))
-       ;; (helm-apt-installed (:foreground ,green))
-       ;; (helm-bookmark-directory (:inherit helm-ff-directory))
-       ;; (helm-bookmark-file (:foreground ,fg-base))
-       ;; (helm-bookmark-gnus (:foreground ,cyan))
-       ;; (helm-bookmark-info (:foreground ,green))
-       ;; (helm-bookmark-man (:foreground ,violet))
-       ;; (helm-bookmark-w3m (:foreground ,yellow))
-       ;; (helm-bookmarks-su (:foreground ,orange))
-       ;; (helm-buffer-not-saved (:foreground ,orange))
-       ;; `(helm-buffer-saved-out ((,class (:foreground ,red :background ,bg-base
-       ;;                                               :inverse-video t))))
-       ;; (helm-buffer-size (:foreground ,fg-lc))
-       ;; `(helm-candidate-number ((,class (:background ,bg-hc :foreground ,fg-hc
-       ;;                                               :bold t))))
-       ;; (helm-ff-directory (:background ,bg-base  :foreground ,blue))
-       ;; (helm-ff-executable (:foreground ,green))
-       ;; (helm-ff-file (:background ,bg-base :foreground ,fg-base))
-       ;; `(helm-ff-invalid-symlink ((,class (:background ,bg-base :foreground ,orange
-       ;;                                                 :slant italic))))
-       ;; (helm-ff-prefix (:background ,yellow :foreground ,bg-base))
-       ;; (helm-ff-symlink (:foreground ,cyan))
-       ;; (helm-grep-file (:foreground ,cyan :underline t))
-       ;; (helm-grep-finish (:foreground ,green))
-       ;; (helm-grep-lineno (:foreground ,orange))
-       ;; (helm-grep-match (:inherit match))
-       ;; (helm-grep-running (:foreground ,red))
-       ;; (helm-header (:inherit header-line))
-       ;; (helm-lisp-completion-info (:foreground ,fg-base))
-       ;; `(helm-lisp-show-completion ((,class (:foreground ,yellow  :background ,bg-hc
-       ;;                                                   :bold t))))
-       ;; (helm-M-x-key (:foreground ,orange :underline t))
-       ;; (helm-moccur-buffer (:foreground ,cyan :underline t))
-       ;; (helm-match (:inherit match))
-       ;; (helm-selection (:background ,bg-hc :underline t))
-       ;; `(helm-selection-line ((,class (:background ,bg-hc :foreground ,fg-hc
-       ;;                                             :underline nil))))
-       ;; (helm-separator (:foreground ,red))
-       ;; `(helm-source-header ((,class (:background ,(ecfg--lc blue) :foreground ,bg-base
-       ;;                                            :underline nil))))
-       ;; (helm-time-zone-current (:foreground ,green))
-       ;; (helm-time-zone-home (:foreground ,red))
-       ;; (helm-visible-mark (:background ,bg-base :foreground ,violet :bold t))
+       (helm-source-header
+        (:inherit default
+         :background ,bg-base
+         :foreground ,fg-hc
+         :weight bold
+         :underline nil
+         :font-family nil
+         :height 1.0))
+       (helm-match-item (:inherit match))
+       (helm-match (:foreground ,(ecfg--hc red)))
+       (helm-grep-match (:inherit match:foreground unspecified))
+       (helm-buffer-not-saved (:foreground ,orange))
+       (helm-buffer-saved-out (:foreground ,red :background ,bg-base :inverse-video t))
+       (helm-buffer-size (:foreground ,fg-lc))
+       (helm-candidate-number (:background ,bg-hc :foreground ,fg-hc :bold t))
+       (helm-ff-directory (:background ,bg-base  :foreground ,blue))
+       (helm-ff-dotted-directory (:inherit helm-ff-directory :background nil  :foreground nil))
+       (helm-ff-file (:background ,bg-base :foreground ,fg-base))
+       (helm-ff-executable (:foreground ,green))
+       (helm-ff-symlink (:foreground ,cyan))
+       (helm-ff-prefix (:background ,yellow :foreground ,bg-base))
+       (helm-grep-file (:foreground ,blue :underline nil))
+       (helm-grep-finish (:foreground ,green))
+       (helm-grep-lineno (:foreground ,fg-lc))
+       (helm-grep-running (:foreground ,red))
+       (helm-header (:inherit header-line))
+       (helm-lisp-completion-info (:foreground ,fg-base))
+       (helm-lisp-show-completion (:foreground ,yellow  :background ,bg-hc :bold t))
+       (helm-M-x-key (:foreground ,orange :underline t))
+       (helm-moccur-buffer (:foreground ,cyan :underline t))
+       (helm-selection (:background ,bg-hc :underline t))
+       (helm-selection-line (:background ,bg-hc :foreground ,fg-hc :underline nil))
+       (helm-separator (:foreground ,red))
+       (helm-visible-mark (:background ,bg-base :foreground ,violet :bold t))
 
 ;;;; markdown-mode
        (markdown-header-delimiter-face (:foreground ,fg-lc))

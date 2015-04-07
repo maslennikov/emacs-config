@@ -9,11 +9,11 @@
   ;; todo explore helm stuff
   (windmove-default-keybindings 'meta)
 
-  (global-set-key (kbd "s-f") 'find-file)
-  (global-set-key (kbd "C-s-f") 'find-file-in-project)
+  ;; (global-set-key (kbd "s-f") 'find-file)
+  ;; (global-set-key (kbd "C-s-f") 'find-file-in-project)
   (global-set-key (kbd "s-F") 'recentf-open-files)
   (global-set-key (kbd "C-x C-r") 'ecfg-ido-recentf-open)
-  (global-set-key (kbd "s-b") 'switch-to-buffer)
+  ;; (global-set-key (kbd "s-b") 'switch-to-buffer)
 
   (global-set-key (kbd "C-s-b") 'ibuffer)
   (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -82,7 +82,7 @@
 
   (global-set-key [f5] 'bookmark-set)
   (global-set-key [f6] 'bookmark-jump)
-  (global-set-key [f9] 'nav-toggle)
+  ;; (global-set-key [f9] 'nav-toggle)
 
 
 ;;; Completion
@@ -106,7 +106,7 @@
 ;;; Unbinding and aborting
 
   (global-set-key (kbd "<escape>") 'keyboard-quit)
-  (global-set-key (kbd "C-q") 'keyboard-quit)
+  ;; (global-set-key (kbd "C-q") 'keyboard-quit)
   (define-key minibuffer-local-map (kbd "<escape>") 'minibuffer-keyboard-quit)
   (define-key minibuffer-local-map (kbd "C-q") 'minibuffer-keyboard-quit)
 
