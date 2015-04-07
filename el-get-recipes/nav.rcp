@@ -1,7 +1,8 @@
 (:name nav
        :description "Emacs mode for filesystem navigation"
        :type hg
-       :url "https://emacs-nav.googlecode.com/hg"
+       ;; modifying the url to use http: hg has troubles with ssl
+       :url "http://emacs-nav.googlecode.com/hg"
        ;; disabling auto-require of features
        ;; :features nav
        :features: nil

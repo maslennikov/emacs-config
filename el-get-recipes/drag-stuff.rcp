@@ -4,5 +4,7 @@
        ;; disable feature autoload
        ;; :features drag-stuff
        :features nil
-       :type http
-       :url "https://github.com/rejeep/drag-stuff/raw/master/drag-stuff.el")
+       ;; :type http
+       ;; :url "https://github.com/rejeep/drag-stuff/raw/master/drag-stuff.el"
+       :type github
+       :pkgname "rejeep/drag-stuff.el")
