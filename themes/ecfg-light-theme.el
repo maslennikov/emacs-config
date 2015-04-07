@@ -100,7 +100,7 @@ providing a clue if it IS-DARK theme."
        (hl-line (:background ,bg-hc))
        (hl-line-face (:background ,bg-hc))
 
-       (region (:background ,selection))
+       (region (:background ,selection :foreground unspecified))
        (secondary-selection (:background ,(ecfg--lc cyan 0.25)))
 
        (fringe (:foreground ,fg-lc :background ,bg-base))
