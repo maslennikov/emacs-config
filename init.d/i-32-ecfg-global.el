@@ -75,6 +75,8 @@
 
          ;; using it instead of `company-complete-common'
          (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+         ;; getting the normal 'C-w' behaviour back
+         (define-key company-active-map (kbd "C-w") nil)
          ;; not turning it on until the first usage (is it ok?)
          (global-company-mode))))))
 

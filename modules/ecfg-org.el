@@ -28,5 +28,7 @@
   (local-unset-key (kbd "<M-up>"))
   (local-unset-key (kbd "<M-down>"))
 
-  (setq org-src-fontify-natively t)
-  (setq org-show-entry-below '((tags-tree . t))))
+  (setq
+   org-src-fontify-natively t
+   org-show-entry-below '((tags-tree . t))
+   org-footnote-auto-label 'confirm))
