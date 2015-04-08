@@ -39,12 +39,14 @@
   ;;                 ac-source-words-in-same-mode-buffers
   ;;                 ac-source-files-in-current-dir)))
 
-  (set
-   (make-local-variable 'company-backends)
-   '((company-dabbrev-code
-      company-keywords
-      company-dabbrev
-      company-yasnippet)))
+  (eval-after-load "company"
+    '(progn
+       (set
+        (make-local-variable 'company-backends)
+        '((company-dabbrev-code
+           company-keywords
+           company-dabbrev
+           company-yasnippet)))))
 
   (yas-minor-mode)
   (local-set-key (kbd "C-j") (kbd "<return>"))

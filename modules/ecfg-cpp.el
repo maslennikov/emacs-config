@@ -31,13 +31,15 @@
   ;;               '(ac-source-words-in-buffer
   ;;                 ac-source-files-in-current-dir)))
 
-  (set
-   (make-local-variable 'company-backends)
-   '((company-semantic
-      company-dabbrev-code
-      company-keywords
-      company-dabbrev
-      company-yasnippet)))
+  (eval-after-load "company"
+    '(progn
+       (set
+        (make-local-variable 'company-backends)
+        '((company-semantic
+           company-dabbrev-code
+           company-keywords
+           company-dabbrev
+           company-yasnippet)))))
 
   (yas-minor-mode)
   (add-hook 'post-self-insert-hook 'ecfg-two-dots nil t))
