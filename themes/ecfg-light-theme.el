@@ -313,8 +313,11 @@ providing a clue if it IS-DARK theme."
 ;;;; yasnippet
        (yas-field-highlight-face (:inherit secondary-selection))
 
-;;;; zencoding
+;;;; xml, html, web-mode, zencoding
        (zencoding-preview-input (:background ,bg-hc :box ,fg-hc))
+       (nxml-element-local-name (:foreground ,blue))
+       (web-mode-current-column-highlight-face (:background ,bg-hc))
+       (web-mode-current-element-highlight-face (:background ,bg-hc))
 
 ;;;; END custom-theme-set-faces
        ))
