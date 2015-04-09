@@ -58,7 +58,7 @@ providing a clue if it IS-DARK theme."
   ;; NOTE Only use in exceptional cirmumstances!
   (defun ecfg--lc (color &optional alpha)
     "Low-color variant of the given COLOR"
-    (ecfg-color-blend color (ecfg--palette-color 'bg-base) (or alpha 0.7)))
+    (ecfg-color-blend color (ecfg--palette-color 'bg-base) (or alpha 0.25)))
 
   (defun ecfg--theme-set-faces (faces)
     "Formatting face definitions according to `defface' specification"
@@ -78,15 +78,23 @@ providing a clue if it IS-DARK theme."
          (yellow  (ecfg--palette-color 'yellow))
          (orange  (ecfg--palette-color 'orange))
          (red     (ecfg--palette-color 'red))
-         (magenta (ecfg--palette-color 'magenta))
          (violet  (ecfg--palette-color 'violet))
          (blue    (ecfg--palette-color 'blue))
          (cyan    (ecfg--palette-color 'cyan))
          (green   (ecfg--palette-color 'green))
 
+         ;; logical parts
          (cursor (ecfg--lc fg-lc 0.8))
-         (selection (ecfg--palette-color 'selection (ecfg--hc bg-hc 0.9)))
-         (modeline-bg (ecfg--lc cursor 0.25)))
+         (modeline-bg (ecfg--lc cursor))
+
+         (sel-primary-bg (ecfg--palette-color 'selection (ecfg--hc bg-hc 0.9)))
+         (sel-secondary-bg (ecfg--lc cyan))
+         (match-hc-bg orange)
+         (match-lc-bg (ecfg--lc orange))
+
+         (tooltip-bg bg-hc)
+         (tooltip-fg cyan)
+         (tooltip-sel-bg sel-secondary-bg))
 
 ;;; Theme Faces
     (ecfg--theme-set-faces
@@ -100,8 +108,8 @@ providing a clue if it IS-DARK theme."
        (hl-line (:background ,bg-hc))
        (hl-line-face (:background ,bg-hc))
 
-       (region (:background ,selection :foreground unspecified))
-       (secondary-selection (:background ,(ecfg--lc cyan 0.25)))
+       (region (:background ,sel-primary-bg :foreground unspecified))
+       (secondary-selection (:background ,sel-secondary-bg))
 
        (fringe (:foreground ,fg-lc :background ,bg-base))
        (linum (:foreground ,fg-lc :background ,bg-base))
@@ -141,22 +149,22 @@ providing a clue if it IS-DARK theme."
        (show-paren-match-face (:background ,blue :foreground ,bg-base))
        (show-paren-mismatch-face (:background ,orange :foreground ,bg-base))
 
-       (highlight (:background ,(ecfg--lc yellow 0.25)))
-       (lazy-highlight (:foreground ,fg-base :background ,(ecfg--lc orange 0.25)))
-       (isearch (:foreground ,bg-base :background ,orange))
-       (isearch-fail (:foreground ,fg-base :background ,(ecfg--lc red 0.25)))
-       (match (:foreground ,fg-hc :background ,selection))
+       (highlight (:background ,(ecfg--lc yellow)))
+       (match (:foreground ,fg-hc :background ,match-lc-bg))
+       (isearch (:foreground ,bg-base :background ,match-hc-bg))
+       (isearch-fail (:foreground ,fg-base :background ,(ecfg--lc red)))
+       (lazy-highlight (:foreground ,fg-base :background ,match-lc-bg))
 
 ;;;; hi-lock-mode
        (hi-black-b (:foreground ,fg-hc :background ,bg-base :weight bold))
        (hi-black-hb (:foreground ,fg-hc :background ,bg-hc :weight bold))
-       (hi-green (:background ,(ecfg--lc green 0.25)))
+       (hi-green (:background ,(ecfg--lc green)))
        (hi-green-b (:foreground ,green :weight bold))
-       (hi-blue (:background ,(ecfg--lc blue 0.25)))
+       (hi-blue (:background ,(ecfg--lc blue)))
        (hi-blue-b (:foreground ,blue :weight bold))
        (hi-red-b (:foreground ,red :weight bold))
-       (hi-yellow (:background ,(ecfg--lc yellow 0.25)))
-       (hi-pink (:background ,(ecfg--lc violet 0.25)))
+       (hi-yellow (:background ,(ecfg--lc yellow)))
+       (hi-pink (:background ,(ecfg--lc violet)))
 
 ;;;; font-lock stuff
        (font-lock-comment-face (:foreground ,fg-lc :slant italic))
@@ -172,7 +180,7 @@ providing a clue if it IS-DARK theme."
        ;; (font-lock-preprocessor-face (:foreground ,blue))
        (font-lock-warning-face (:foreground ,red :weight normal))
 
-       (trailing-whitespace (:background ,(ecfg--lc red 0.25)))
+       (trailing-whitespace (:background ,(ecfg--lc red)))
        (success (:foreground ,green))
        (warning (:foreground ,orange))
        (error (:foreground ,red))
@@ -190,23 +198,23 @@ providing a clue if it IS-DARK theme."
        (ac-yasnippet-selection-face (:background ,(ecfg--lc yellow) :foreground ,(ecfg--hc yellow)))
 
        (company-template-field (:background ,yellow :foreground ,bg-hc))
-       (company-tooltip (:background ,bg-hc :foreground ,cyan))
-       (company-tooltip-selection (:background ,(ecfg--lc cyan 0.25)))
-       (company-tooltip-mouse (:background ,(ecfg--hc cyan) :foreground ,(ecfg--lc cyan)))
-       (company-tooltip-common (:inherit company-tooltip :foreground ,fg-hc :underline t))
-       (company-tooltip-common-selection (:inherit company-tooltip-selection :foreground ,fg-hc :underline t))
+       (company-tooltip (:background ,tooltip-bg :foreground ,tooltip-fg))
+       (company-tooltip-common (:inherit company-tooltip :foreground ,fg-hc))
+       (company-tooltip-selection (:background ,tooltip-sel-bg :foreground ,fg-hc))
+       (company-tooltip-common-selection (:inherit company-tooltip-selection :foreground ,fg-hc))
+       (company-tooltip-mouse (:inherit company-tooltip-selection :inverse-video t))
        (company-tooltip-annotation (:foreground ,fg-hc :background ,bg-hc))
-       (company-scrollbar-fg (:foreground ,bg-base :background ,fg-base))
-       (company-scrollbar-bg (:background ,bg-hc :foreground ,cyan))
-       (company-preview (:background ,bg-hc :foreground ,cyan))
-       (company-preview-common (:foreground ,fg-hc :underline t))
+       (company-scrollbar-fg (:background ,tooltip-fg :foreground ,bg-hc))
+       (company-scrollbar-bg (:background ,tooltip-sel-bg))
+       (company-preview (:inherit company-tooltip))
+       (company-preview-common (:inherit company-tooltip-common-selection :underline t))
 
 ;;;; popup
        (popup-face (:background ,bg-hc :foreground ,fg-base))
        (popup-isearch-match (:background ,yellow :foreground ,bg-base))
        (popup-menu-face (:background ,bg-hc :foreground ,fg-base))
        (popup-menu-mouse-face (:background ,blue :foreground ,fg-base))
-       (popup-menu-selection-face (:background ,magenta :foreground ,bg-base))
+       (popup-menu-selection-face (:background ,violet :foreground ,bg-base))
        (popup-scroll-bar-background-face (:background ,fg-lc))
        (popup-scroll-bar-foreground-face (:background ,fg-hc))
        (popup-tip-face (:background ,bg-hc :foreground ,fg-base))
@@ -227,6 +235,7 @@ providing a clue if it IS-DARK theme."
 
        (org-ellipsis (:foreground ,fg-lc))
        (org-link (:foreground ,blue))
+       (org-footnote (:inherit org-link :foreground ,fg-lc))
        (org-date (:foreground ,violet))
        (org-code (:foreground ,fg-lc))
 
@@ -302,7 +311,7 @@ providing a clue if it IS-DARK theme."
        ;;                                            :underline nil))))
        ;; (helm-time-zone-current (:foreground ,green))
        ;; (helm-time-zone-home (:foreground ,red))
-       ;; (helm-visible-mark (:background ,bg-base :foreground ,magenta :bold t))
+       ;; (helm-visible-mark (:background ,bg-base :foreground ,violet :bold t))
 
 ;;;; markdown-mode
        (markdown-header-delimiter-face (:foreground ,fg-lc))
@@ -329,16 +338,13 @@ providing a clue if it IS-DARK theme."
 
 ;;;; ansi-colors
      `(ansi-color-names-vector
-       [,bg-hc ,red ,green ,yellow ,blue ,magenta ,cyan ,fg-base])
+       [,bg-hc ,red ,green ,yellow ,blue ,violet ,cyan ,fg-base])
 
 ;;;; compilation
      `(compilation-message-face 'default)
 
 ;;;; fill-column-indicator
      `(fci-rule-color ,bg-hc)
-
-;;;; highlight-changes
-     `(highlight-changes-colors '(,magenta ,violet))
 
 ;;;; END custom-theme-set-variables
      )
@@ -390,7 +396,6 @@ providing a clue if it IS-DARK theme."
    (yellow  . "#eab700")
    (orange  . "#f5871f")
    (red     . "#dc322f")
-   (magenta . "#8959a8")
    (violet  . "#8959a8")
    (blue    . "#255da5")
    (cyan    . "#3e999f")
