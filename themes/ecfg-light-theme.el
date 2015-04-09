@@ -239,8 +239,8 @@ providing a clue if it IS-DARK theme."
        (org-date (:foreground ,violet))
        (org-code (:foreground ,fg-lc))
 
-       (org-todo (:foreground ,red))
-       (org-done (:foreground ,green))
+       (org-todo (:foreground ,red :weight normal))
+       (org-done (:foreground ,fg-lc :weight normal))
 
        (org-agenda-dim-todo-face (:foreground ,fg-lc))
        (org-agenda-restriction-lock (:background ,yellow))
