@@ -62,6 +62,80 @@ It can take a few minutes, all depending on your internet connection speed, for
 the initial start-up to download and set all the required packages.
 
 
+* How it works
+
+The entry point to the =ecfg= is the =init.el= file. It takes care of the
+correct load order of the rest modules.
+
+Configuration files are located in two directories:
+- =init.d=: contains core emacs configuration, universally applied to all emacs
+  activities;
+- =modules=: contains configuration relevand for particular contexts (e.g. major
+  mode set-ups).
+
+Every of this files is called a "module" in terms of =ecfg=. For each module, a
+init function with a special name can be defined: =ecfg-NAME-module-init=, where
+the module's name is acquired from its filename of the format
+=ecfg-NAME.el=. After loading the module, its init function will be called, if
+present.
+
+Core configuration from the =init.d= is loaded immediately during the emacs
+startup, therefore a careful analysis of potential performance implications is
+required when modifying these files. Please refer to [[Package Installation
+Policy]].
+
+Configuration from the =modules= directory is handled with the autoloads
+facility. During the first run, the autoloads for the whole directory will be
+generated (see =ecfg-user-dir=) and will be used in the subsequent runs. It is
+recommended to have the module's init function autoloaded and to register this
+function as a hook in =auto-mode-alist= via the helper macro =ecfg-auto-module=.
+
+Example:
+#+BEGIN_SRC emacs-lisp
+;;;###autoload (ecfg-auto-module "CMakeLists\\.txt$" cmake)
+#+END_SRC
+
+In this case, the whole module will be forced to be loaded only when a file with
+the corresponding pattern is opened.
+
+
+** El-Get
+
+All third-party packages are installed via [[https://github.com/dimitri/el-get][=el-get=]], therefore it is
+bootstrapped as the first step. Instead of using =el-get= directly, the
+=ecfg-install= macro should be used.
+
+The standard =el-get= behavior is restricted for performance reasons to just
+downloading the packages and adding their directories to the
+=load-path=. Automatic autoloads management is disabled, package init hooks are
+passed dynamically via the =ecfg-install= macro; in case when autoloads should
+be generated and loaded for the whole package (normally, when a manual
+=autoload= invocation in the init hook is not convenient to use), the
+=ecfg-with-local-updates=.
+
+To override the =el-get= recipes, store the fixed recipe file in
+=el-get-recipes=.
+
+
+* Package installation policy
+
+The new package installacion should be accompanied by the following reasoning:
+
+1. Does the package belong to the core configuration (will go into =init.d=) or
+   it is relevant only to the specific context (=modules=)?
+2. Is there anything in =el-get= recipe that will cause an immediate loading of
+   the package (e.g. =:features= or specific =:prepare= code)? If yes, override
+   the recipe with the local copy.
+3. What event will trigger the package load? For instance, if it is always the
+   invocation of a single command (e.g. via s shortcut), then it'll make sense
+   to write a single =(autoload ...)= statement in the init hook of your
+   =ecfg-install=. If there are multiple entry points to the package (like with
+   =helm=), id would be sensible to read =loaddefs= for the whole package during
+   the init. The usage of package-isolated autoloads is facilitated by
+   =ecfg-with-local-autoloads= macro.
+
+
+
 * Known issues
 
 While experimenting with =el-get=, =el-get-bundle=, and recipes, be sure to
