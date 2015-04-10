@@ -12,6 +12,12 @@
 
    (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
    (add-to-list 'auto-mode-alist '("\\.org.txt\\'" . org-mode))
+
+   (eval-after-load "org"
+     '(progn
+        ;; releasing the autocomplete shortcut
+        (define-key org-mode-map (kbd "<C-tab>") nil)))
+
    (add-hook 'org-mode-hook 'ecfg--org-hook)))
 
 ;; autoloading org-mode immediately to override standard org-loaddefs
