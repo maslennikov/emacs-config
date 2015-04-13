@@ -82,7 +82,6 @@
 
   (global-set-key [f5] 'bookmark-set)
   (global-set-key [f6] 'bookmark-jump)
-  ;; (global-set-key [f9] 'nav-toggle)
 
 
 ;;; Completion

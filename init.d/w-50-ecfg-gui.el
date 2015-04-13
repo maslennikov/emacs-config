@@ -7,7 +7,6 @@
 
   (ecfg--setup-basic-gui)
   (ecfg--setup-sml-modeline)
-  (ecfg--setup-emacs-nav)
   (ecfg--setup-color-theme))
 
 
@@ -23,14 +22,6 @@
    (setq sml-modeline-borders '("[" . "]"))
    (setq sml-modeline-len 14)
    (sml-modeline-mode t)))
-
-(defun ecfg--setup-emacs-nav ()
-  ;; todo find something better
-  (ecfg-install nav
-   (autoload 'nav-toggle "nav" "toggling nav window" t)
-   (eval-after-load "nav"
-     '(nav-disable-overeager-window-splitting))))
-
 
 (defun ecfg--setup-color-theme ()
   (add-to-list 'custom-theme-load-path (expand-file-name "themes" ecfg-dir))
