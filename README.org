@@ -47,7 +47,7 @@ and with =custom-file=.
 To start using the =ecfg=, clone the repo into =~/.emacs.config= or anywhere you
 find more appropriate.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC shell
 git clone https://github.com/maslennikov/emacs-config.git ~/.emacs.config
 #+END_SRC
 
@@ -55,11 +55,24 @@ To load the =ecfg= during the Emacs start-up, put as a first line into your
 =~/.emacs= the following:
 
 #+BEGIN_SRC emacs-lisp
+;; in case you use windows, teach it the utf8
+(prefer-coding-system 'utf-8)
+
 (load-file "~/.emacs.config/init.el")
+
+;; for those preferring to have the emacs wingow maximized
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+END_SRC
 
 It can take a few minutes, all depending on your internet connection speed, for
 the initial start-up to download and set all the required packages.
+
+When mainly starting the emacs workflow from shell, it could be helpful to have
+the following function added to the =~/.bashrc=
+
+#+BEGIN_SRC shell
+em() { emacs -mm "$@" & }
+#+END_SRC
 
 
 * How it works
@@ -81,8 +94,8 @@ present.
 
 Core configuration from the =init.d= is loaded immediately during the emacs
 startup, therefore a careful analysis of potential performance implications is
-required when modifying these files. Please refer to [[Package Installation
-Policy]].
+required when modifying these files. Please refer to the folliwing "Package
+Installation Policy" section.
 
 Configuration from the =modules= directory is handled with the autoloads
 facility. During the first run, the autoloads for the whole directory will be
