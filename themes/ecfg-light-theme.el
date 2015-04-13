@@ -224,10 +224,10 @@ providing a clue if it IS-DARK theme."
        (outline-2 (:inherit default :foreground ,blue :weight bold))
        (outline-3 (:inherit default :foreground ,green :weight bold))
        (outline-4 (:inherit default :foreground ,violet :weight bold))
-       (outline-5 (:inherit default :foreground ,fg-hc :slant italic))
-       (outline-6 (:inherit default :foreground ,fg-hc :slant italic))
-       (outline-7 (:inherit default :foreground ,fg-hc :slant italic))
-       (outline-8 (:inherit default :foreground ,fg-hc :slant italic))
+       (outline-5 (:inherit default :foreground ,fg-lc :weight bold))
+       (outline-6 (:inherit default :foreground ,fg-lc :weight bold))
+       (outline-7 (:inherit default :foreground ,fg-lc :weight bold))
+       (outline-8 (:inherit default :foreground ,fg-lc :weight bold))
 
 ;;;; org-mode
        (org-document-title (:foreground ,fg-hc  :weight bold))
@@ -312,6 +312,7 @@ providing a clue if it IS-DARK theme."
        (markdown-header-face-3 (:inherit outline-3))
        (markdown-header-face-4 (:inherit outline-4))
        (markdown-header-face-5 (:inherit outline-5))
+       (markdown-header-face-6 (:inherit outline-6))
        (markdown-url-face (:foreground ,fg-lc))
 
 ;;;; yasnippet
