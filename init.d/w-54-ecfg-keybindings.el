@@ -4,6 +4,15 @@
 
 (defun ecfg-keybindings-module-init ()
 
+;;; Compatibility
+
+  ;; forcing emacs handle winkeys in windows
+  (setq w32-pass-lwindow-to-system nil)
+  (setq w32-pass-rwindow-to-system nil)
+  (setq w32-lwindow-modifier 'super)
+  (setq w32-rwindow-modifier 'super)
+
+
 ;;; Windows, files, and buffers
 
   ;; todo explore helm stuff
