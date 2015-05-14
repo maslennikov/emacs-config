@@ -113,6 +113,7 @@
   (ecfg-install projectile
    (ecfg-with-local-autoloads
     (global-set-key (kbd "C-s-f") 'helm-projectile-find-file-dwim)
+    (global-set-key (kbd "<C-s-268632070>") 'helm-projectile-find-file-dwim)
     (global-set-key (kbd "<f8>") 'helm-projectile-find-other-file)
     ;; todo consider using helm-projectile-ag
     (global-set-key (kbd "<f9>") 'helm-projectile-grep))))
