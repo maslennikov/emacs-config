@@ -50,4 +50,5 @@
 
   (yas-minor-mode)
   (local-set-key (kbd "C-j") (kbd "<return>"))
-  (local-set-key (kbd "<s-tab>") 'ecfg--manually-bounce-indent))
+  (local-set-key (kbd "<s-tab>") 'ecfg--manually-bounce-indent)
+  (setq mode-name "JS2"))

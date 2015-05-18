@@ -7,6 +7,7 @@
 
   (ecfg--setup-basic-gui)
   (ecfg--setup-sml-modeline)
+  (ecfg--setup-diminish)
   (ecfg--setup-color-theme))
 
 
@@ -22,6 +23,12 @@
    (setq sml-modeline-borders '("[" . "]"))
    (setq sml-modeline-len 14)
    (sml-modeline-mode t)))
+
+(defun ecfg--setup-diminish ()
+  (ecfg-install
+   diminish
+   (eval-after-load "abbrev" '(diminish 'abbrev-mode))
+   (eval-after-load "projectile" '(diminish 'projectile-mode "Prj"))))
 
 (defun ecfg--setup-color-theme ()
   (add-to-list 'custom-theme-load-path (expand-file-name "themes" ecfg-dir))
