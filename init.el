@@ -51,22 +51,8 @@ following regexp: \".*ecfg-\\(.+\\)\.el$\".
 
 ;;; Loading core initialization scripts
 ;;;
-;;; Core initialization scripts are divided into i-modules and w-modules.
-;;; I-modules is the core stuff emacs needs right from the very beginning - from
-;;; the init phase. W-modules are the core emacs components loading of which can
-;;; be deferred until the emacs window is set-up. This is done with the purpose
-;;; of providing the user with as fast visual feedback as possible.
-
-;; loading the i-modules
 (ecfg-run-init-scripts
- (directory-files (expand-file-name "init.d" ecfg-dir) t "^i-"))
-
-;; adding hook to defer loading of w-modules
-(add-hook 'window-setup-hook (lambda ()
-   (ecfg-run-init-scripts
-    (directory-files (expand-file-name "init.d" ecfg-dir) t "^w-"))
-   ;; (message ">>> init end: %s" (format-time-string "%S.%3N"))
-   ))
+ (directory-files (expand-file-name "init.d" ecfg-dir) t "^[0-9][0-9]-ecfg-"))
 
 
 ;;; Loading additional modules
@@ -99,6 +85,7 @@ auto-mode-alist to trigger the autoload of the module."
 
        ;; registering the auto-module hook to the aut-mode alist
        (add-to-list 'auto-mode-alist '(,pattern . ,auto-hook-name)))))
+
 
 ;;; load all modules for the first time triggering el-get to install all stuff
 ;;; we need; for the subsequent runs the generated autoloads will be picked-up
