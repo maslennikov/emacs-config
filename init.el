@@ -35,7 +35,7 @@ named `ecfg-MODULENAME-module-init' if it's defined.
     (load-file filename)
     (if (fboundp init-hook)
         (funcall init-hook)
-      (message "No module init-hook found: %s" init-hook))))
+      (message "ECFG: No module init-hook found: %s" init-hook))))
 
 
 (defun ecfg-run-init-scripts (files)
