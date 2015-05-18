@@ -11,6 +11,7 @@
   (ecfg--setup-helm)
   (ecfg--setup-autopair)
   (ecfg--setup-recentf)
+  (ecfg--setup-undo)
 
   ;; getting rid of annoying auto-opened buffers
   (if (get-buffer ".emacs.elc") (kill-buffer ".emacs.elc"))
@@ -221,3 +222,28 @@
     (if (find-file (ido-completing-read "Find recent file: " recentf-list))
         (message "Opening file...")
       (message "Aborting"))))
+
+
+(defun ecfg--setup-undo ()
+  (ecfg-install undo-tree
+   (ecfg-with-local-autoloads
+
+    (eval-after-load "undo-tree"
+      '(progn
+         (global-set-key (kbd "C-z") 'undo-tree-undo)
+         (global-set-key (kbd "M-z") 'undo-tree-redo)
+         (global-set-key (kbd "s-z") 'undo-tree-visualize)))
+
+    (defun ecfg--load-undo-tree-hook ()
+      (let ((buffer (buffer-name)))
+        ;; ignoring buffers like " *temp*", "*helm mini*", etc; keeping scratch
+        (unless (and (string-match-p "^[ \t]*\\*.*\\*[ \t]*$" buffer)
+                     (not (string= "*scratch*" buffer)))
+          (global-undo-tree-mode)
+          ;; unsubscribing
+          (remove-hook 'first-change-hook 'ecfg--load-undo-tree-hook))))
+
+    ;; applying this only after the window-setup: after *scratch* is already
+    ;; there and opened file buffer is populated
+    (add-hook 'window-setup-hook
+     (lambda () (add-hook 'first-change-hook 'ecfg--load-undo-tree-hook))))))

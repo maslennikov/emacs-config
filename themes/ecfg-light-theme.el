@@ -318,6 +318,11 @@ providing a clue if it IS-DARK theme."
 ;;;; yasnippet
        (yas-field-highlight-face (:inherit secondary-selection))
 
+;;;; undo-tree
+       (undo-tree-visualizer-default-face (:foreground ,fg-lc))
+       (undo-tree-visualizer-unmodified-face (:foreground ,blue))
+       (undo-tree-visualizer-current-face (:foreground ,red :weight bold))
+
 ;;;; xml, html, web-mode, zencoding
        (zencoding-preview-input (:background ,bg-hc :box ,fg-hc))
        (nxml-element-local-name (:foreground ,blue))

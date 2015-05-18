@@ -28,6 +28,7 @@
   (ecfg-install
    diminish
    (eval-after-load "abbrev" '(diminish 'abbrev-mode))
+   (eval-after-load "undo-tree" '(diminish 'undo-tree-mode))
    (eval-after-load "projectile" '(diminish 'projectile-mode "Prj"))))
 
 (defun ecfg--setup-color-theme ()

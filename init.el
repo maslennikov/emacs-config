@@ -3,6 +3,7 @@
 ;; Entry init script for Emacs configuration set-up `ecfg'
 ;;
 
+;; todo: use `before-init-time' and `after-init-time'
 ;; (message ">>> init start: %s" (format-time-string "%S.%3N"))
 
 (defvar ecfg-dir (file-name-directory (or load-file-name (buffer-file-name)))
@@ -105,6 +106,3 @@ auto-mode-alist to trigger the autoload of the module."
     ;; making the first run, churn up all modules to trigger el-get installs
     (ecfg-run-init-scripts (directory-files ecfg-module-dir t))
     (update-directory-autoloads ecfg-module-dir)))
-
-;; todo: set title to file-name-nodirectory
-;; todo: autoloads for different modules like ecfg-org.el
