@@ -24,6 +24,9 @@
   (c-set-offset 'statement-cont '+)
   (c-set-offset 'arglist-cont-nonempty '+)
 
+  ;; navigating through code with ctrl-mouse
+  (global-set-key '[(C-down-mouse-1)] 'semantic-ia-fast-mouse-jump)
+
   ;; (setq ac-sources
   ;;       (append ac-sources
   ;;               '(ac-source-words-in-buffer
