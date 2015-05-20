@@ -7,7 +7,9 @@
   (eval-after-load "grep"
     '(progn
        (grep-compute-defaults)
-       (add-to-list 'grep-find-ignored-directories "build*")))
+       (add-to-list 'grep-find-ignored-directories "build*")
+       (add-to-list 'grep-find-ignored-directories "contrib")
+       (add-to-list 'grep-find-ignored-directories "bin")))
 
   (eval-after-load "find-file-in-project"
     '(progn
