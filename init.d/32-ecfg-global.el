@@ -232,6 +232,7 @@
 
     (eval-after-load "undo-tree"
       '(progn
+         (global-set-key (kbd "C-/") 'ecfg-toggle-comment-on-lines)
          (global-set-key (kbd "C-z") 'undo-tree-undo)
          (global-set-key (kbd "M-z") 'undo-tree-redo)
          (global-set-key (kbd "s-z") 'undo-tree-visualize)))
