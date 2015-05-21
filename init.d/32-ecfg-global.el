@@ -66,6 +66,7 @@
       '(progn
          (add-to-list 'company-begin-commands 'backward-delete-char)
          (setq
+          company-dabbrev-ignore-case t
           company-dabbrev-code-ignore-case t
           company-dabbrev-downcase nil
           company-minimum-prefix-length 2
