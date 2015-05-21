@@ -233,7 +233,13 @@
 
     (eval-after-load "undo-tree"
       '(progn
-         (global-set-key (kbd "C-/") 'ecfg-toggle-comment-on-lines)
+         ;; removing undo-tree key definitions
+         (define-key undo-tree-map (kbd "C-/") nil)
+         (define-key undo-tree-map "\C-_" nil)
+         (define-key undo-tree-map (kbd "C-?") nil)
+         (define-key undo-tree-map (kbd "M-_") nil)
+         (define-key undo-tree-map (kbd "\C-x u") nil)
+
          (global-set-key (kbd "C-z") 'undo-tree-undo)
          (global-set-key (kbd "M-z") 'undo-tree-redo)
          (global-set-key (kbd "s-z") 'undo-tree-visualize)))
