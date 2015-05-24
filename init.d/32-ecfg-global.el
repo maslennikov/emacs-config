@@ -127,7 +127,8 @@
   "Is called when helm is loaded."
 
   (projectile-global-mode)
-  (setq projectile-completion-system 'helm)
+  (setq projectile-completion-system 'helm
+        projectile-use-git-grep t)
   (helm-projectile-on)
 
 ;;; helm keymap

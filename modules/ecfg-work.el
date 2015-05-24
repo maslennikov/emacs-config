@@ -1,4 +1,8 @@
 ;; -*- lexical-binding: t -*-
+;;
+;; Mode for setting-up miscellaneous working environment. Currently loaded
+;; automatically by start-up. As alternative, could be loaded from .emacs
+;; manually.
 
 ;;;###autoload
 (defun ecfg-work-module-init ()
@@ -9,11 +13,18 @@
        (grep-compute-defaults)
        (add-to-list 'grep-find-ignored-directories "build*")
        (add-to-list 'grep-find-ignored-directories "contrib")
-       (add-to-list 'grep-find-ignored-directories "bin")))
+       (add-to-list 'grep-find-ignored-directories "bin")
 
-  (eval-after-load "find-file-in-project"
+       (add-to-list 'grep-find-ignored-directories "node_modules")
+       (add-to-list 'grep-find-ignored-directories "bower_components")
+       (add-to-list 'grep-find-ignored-directories "uploads")))
+
+  (eval-after-load "projectile"
     '(progn
-       (setq ffip-limit 3000)
-       (setq ffip-find-options "-not -path \"*/build*/*\"")))
+       (add-to-list 'projectile-globally-ignored-directories "node_modules")
+       (add-to-list 'projectile-globally-ignored-directories "bower_components")
+       (add-to-list 'projectile-globally-ignored-directories "client/bower_components")))
+  )
 
-  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)))
+;; autoloading it immediately
+;;;###autoload (ecfg-work-module-init)

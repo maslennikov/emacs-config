@@ -3,7 +3,8 @@
 ;;;###autoload
 (defun ecfg-cpp-module-init ()
   (add-hook 'c-mode-hook 'ecfg--cpp-hook)
-  (add-hook 'c++-mode-hook 'ecfg--cpp-hook))
+  (add-hook 'c++-mode-hook 'ecfg--cpp-hook)
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode)))
 
 ;;;###autoload (ecfg-auto-module "\\.c$" cpp)
 ;;;###autoload (ecfg-auto-module "\\.cc$" cpp)
