@@ -2,8 +2,6 @@
 # name: step
 # key: makestep
 # --
-flowy(
-function() {
-$0			
-}
-);
+F(function() {
+$0
+});
