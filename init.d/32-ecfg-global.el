@@ -107,6 +107,8 @@
    (ecfg-with-local-autoloads
     (global-set-key (kbd "M-x") 'helm-M-x)
     (global-set-key (kbd "s-f") 'helm-find-files)
+    (global-set-key (kbd "C-s-f") 'helm-find-files)
+    (global-set-key (kbd "<C-s-268632070>") 'helm-find-files)
     (global-set-key (kbd "s-b") 'helm-mini)
     (global-set-key (kbd "C-q g") 'ecfg-helm-do-grep-recursive)
     (global-set-key (kbd "C-q o") 'helm-occur)
@@ -116,11 +118,18 @@
 ;;; set-up projectile
   (ecfg-install projectile
    (ecfg-with-local-autoloads
-    (global-set-key (kbd "C-s-f") 'helm-projectile-find-file-dwim)
-    (global-set-key (kbd "<C-s-268632070>") 'helm-projectile-find-file-dwim)
+    (global-set-key (kbd "s-f") 'ecfg--projectile-or-find-file)
     (global-set-key (kbd "<f8>") 'helm-projectile-find-other-file)
-    ;; todo consider using helm-projectile-ag
-    (global-set-key (kbd "<f9>") 'helm-projectile-grep))))
+    ;; todo consider using helm-projectile-ag?
+    (global-set-key (kbd "<f9>") 'helm-projectile-grep)
+
+    (defun ecfg--projectile-or-find-file (arg)
+      "Tries to summon projectile and falls back to helm-find-files"
+      (interactive "P")
+      (condition-case nil
+          (if (projectile-project-root)
+              (helm-projectile-find-file-dwim))
+        (error (helm-find-files arg)))))))
 
 
 (defun ecfg--helm-hook ()

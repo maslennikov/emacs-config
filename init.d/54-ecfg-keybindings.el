@@ -18,10 +18,8 @@
   ;; todo explore helm stuff
   (windmove-default-keybindings 'meta)
 
-  ;; (global-set-key (kbd "s-f") 'find-file)
-  ;; (global-set-key (kbd "C-s-f") 'find-file-in-project)
-  (global-set-key (kbd "s-F") 'recentf-open-files)
-  (global-set-key (kbd "C-x C-r") 'ecfg-ido-recentf-open)
+  ;; (global-set-key (kbd "s-F") 'recentf-open-files)
+  ;; (global-set-key (kbd "C-x C-r") 'ecfg-ido-recentf-open)
   ;; (global-set-key (kbd "s-b") 'switch-to-buffer)
 
   (global-set-key (kbd "C-s-b") 'ibuffer)
