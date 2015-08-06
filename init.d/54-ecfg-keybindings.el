@@ -16,7 +16,7 @@
 ;;; Windows, files, and buffers
 
   ;; todo explore helm stuff
-  (windmove-default-keybindings 'meta)
+  (windmove-default-keybindings 'super)
 
   ;; (global-set-key (kbd "s-F") 'recentf-open-files)
   ;; (global-set-key (kbd "C-x C-r") 'ecfg-ido-recentf-open)
