@@ -27,6 +27,12 @@
        (add-to-list 'projectile-globally-ignored-directories "node_modules")
        (add-to-list 'projectile-globally-ignored-directories "bower_components")
        (add-to-list 'projectile-globally-ignored-directories "client/bower_components")))
+
+  (eval-after-load "org"
+    '(progn
+       (setq org-directory "~/private-documents/notes")
+       (setq org-default-notes-file (expand-file-name "inbox.org.txt" org-directory))
+       ))
   )
 
 ;; autoloading it immediately

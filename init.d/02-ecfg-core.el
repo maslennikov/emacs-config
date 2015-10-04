@@ -50,10 +50,13 @@
   ;; set lang to enable Chinese display in shell-mode
   (setenv "LANG" "en_US.UTF-8")
 
-;;; Coding systems
+;;; Coding systems and localization
   (set-default-coding-systems 'utf-8)
   (prefer-coding-system 'windows-1251)
   (prefer-coding-system 'utf-8)
+
+  (add-hook 'calendar-load-hook (lambda () (calendar-set-date-style 'european)))
+  (setq calendar-week-start-day 1)
 
 ;;; auto-revert everything
   (global-auto-revert-mode 1)
