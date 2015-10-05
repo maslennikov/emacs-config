@@ -1,4 +1,12 @@
-;; defining global keybindings
+;; Defining global keybindings.
+;;
+;; Right now most of the global keybindings are defined here. Nevertheless, some
+;; of the definitions still pop up in the module configurations (e.g. in
+;; modules/ecfg-org.el). Please grep for `global-set-key' entries everywhere
+;; before defining a new keybinding here.
+;;
+;; Mode- or buffer-local stuff is normally defined in hooks to corresponding
+;; modes.
 ;;
 ;; -*- lexical-binding: t -*-
 
@@ -18,21 +26,12 @@
   ;; todo explore helm stuff
   (windmove-default-keybindings 'super)
 
-  ;; (global-set-key (kbd "s-F") 'recentf-open-files)
-  ;; (global-set-key (kbd "C-x C-r") 'ecfg-ido-recentf-open)
-  ;; (global-set-key (kbd "s-b") 'switch-to-buffer)
-
   (global-set-key (kbd "C-s-b") 'ibuffer)
   (global-set-key (kbd "C-x C-b") 'ibuffer)
   (global-set-key (kbd "<C-s-268632066>") 'ibuffer) ;tweak for os-x
 
   (global-set-key (kbd "s-s") 'save-buffer)
   (global-set-key (kbd "s-S") 'write-file)
-
-  ;;(global-set-key (kbd "C-x C-p") 'find-file-at-point)
-  ;;(global-set-key (kbd "C-c y") 'bury-buffer)
-  ;;(global-set-key (kbd "C-c r") 'revert-buffer)
-  ;;(global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
 
 
 ;;; Copy, paste, insert
