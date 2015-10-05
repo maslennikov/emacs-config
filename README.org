@@ -1,4 +1,4 @@
-#+TITLE: Emacs Config
+#+TITLE: ECFG: Emacs Config
 
 * Foreword
 
@@ -83,7 +83,7 @@ correct load order of the rest modules.
 Configuration files are located in two directories:
 - =init.d=: contains core emacs configuration, universally applied to all emacs
   activities;
-- =modules=: contains configuration relevand for particular contexts (e.g. major
+- =modules=: contains configuration relevant for particular contexts (e.g. major
   mode set-ups).
 
 Every of this files is called a "module" in terms of =ecfg=. For each module, a
@@ -94,8 +94,8 @@ present.
 
 Core configuration from the =init.d= is loaded immediately during the emacs
 startup, therefore a careful analysis of potential performance implications is
-required when modifying these files. Please refer to the folliwing "Package
-Installation Policy" section.
+required when modifying these files. Please refer to the folliwing [[#package-installation-policy]["Package
+installation policy"]] section.
 
 Configuration from the =modules= directory is handled with the autoloads
 facility. During the first run, the autoloads for the whole directory will be
@@ -112,22 +112,52 @@ In this case, the whole module will be forced to be loaded only when a file with
 the corresponding pattern is opened.
 
 
-** El-Get
+** TODO El-Get
 
-All third-party packages are installed via [[https://github.com/dimitri/el-get][=el-get=]], therefore it is
-bootstrapped as the first step. Instead of using =el-get= directly, the
-=ecfg-install= macro should be used.
+All third-party packages are installed via [[https://github.com/dimitri/el-get][el-get]], therefore it is bootstrapped
+as the first step. Instead of using =el-get= directly, the =ecfg-install= macro
+should be used.
 
 The standard =el-get= behavior is restricted for performance reasons to just
 downloading the packages and adding their directories to the
-=load-path=. Automatic autoloads management is disabled, package init hooks are
-passed dynamically via the =ecfg-install= macro; in case when autoloads should
-be generated and loaded for the whole package (normally, when a manual
-=autoload= invocation in the init hook is not convenient to use), the
-=ecfg-with-local-updates=.
+=load-path=:
+- Package won't be automatically 'require'd.
+
+- Automatic autoloads management is disabled; package init hooks are passed
+  dynamically via the =ecfg-install= macro.
+
+  In case when autoloads should be generated and loaded for the whole package
+  (normally, when a manual =autoload= invocation in the init hook is not
+  convenient to use), the macro =ecfg-with-local-autoloads= can be used.
+
+- Nested =ecfg-install= invocations are posible to manage package dependencies.
+
 
 To override the =el-get= recipes, store the fixed recipe file in
-=el-get-recipes=.
+=el-get-recipes= directory.
+
+Example of package installations (see also [[#package-installation-policy][Package installation policy]]):
+#+BEGIN_SRC emacs-lisp
+  ;; installing the `drag-stuff' package: not requiring it immediately, explicitly
+  ;; defining autoloads without building package loaddefs.el.
+  (ecfg-install drag-stuff
+    (autoload 'drag-stuff-up "drag-stuff")
+    (autoload 'drag-stuff-down "drag-stuff"))
+
+  ;; installing `ido-ubiquitous' package: requiring it and using immediately after
+  ;; installation
+  (ecfg-install ido-ubiquitous
+    (require 'ido-ubiquitous)
+    (ido-ubiquitous-mode))
+
+   ;; this is where package-local autoloads come handy: not requiring `projectile'
+   ;; immediately but setting shortcut hooks to lazy load the package on demand
+   (ecfg-install projectile
+     (ecfg-with-local-autoloads
+       (global-set-key (kbd "C-s-f") 'helm-projectile-find-file-dwim)
+       (global-set-key (kbd "<f8>") 'helm-projectile-find-other-file)
+       (global-set-key (kbd "<f9>") 'helm-projectile-grep)))
+#+END_SRC
 
 
 * Package installation policy
@@ -138,7 +168,7 @@ The new package installacion should be accompanied by the following reasoning:
    it is relevant only to the specific context (=modules=)?
 2. Is there anything in =el-get= recipe that will cause an immediate loading of
    the package (e.g. =:features= or specific =:prepare= code)? If yes, override
-   the recipe with the local copy.
+   the recipe with the local copy in =el-get-recipes= directory.
 3. What event will trigger the package load? For instance, if it is always the
    invocation of a single command (e.g. via s shortcut), then it'll make sense
    to write a single =(autoload ...)= statement in the init hook of your
