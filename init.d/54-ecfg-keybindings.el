@@ -43,6 +43,7 @@
 
   (global-set-key (kbd "s-x") 'ecfg-kill-line-or-selection)
   (global-set-key (kbd "s-c") 'ecfg-copy-line-or-selection)
+  (global-set-key (kbd "s-d") 'ecfg-duplicate-line)
   (global-set-key "\C-v" 'clipboard-yank)
   (global-set-key "\M-v" 'yank-pop)
   ;; (global-set-key "\C-\M-v" 'popup-yank-menu)
@@ -75,7 +76,6 @@
   (global-set-key (kbd "C-M-r") 'isearch-backward)
 
   (global-set-key (kbd "s-r") 'query-replace-regexp)
-  (global-unset-key (kbd "s-d")) ;isearch-repeat-backward gets on my nerves
 
   (global-set-key (kbd "s-h") 'ecfg-highlight-current-tag-occurences)
   (global-set-key (kbd "C-S-s-h") 'ecfg-highlight-occurences)

@@ -56,6 +56,22 @@ FILENAME defaults to `buffer-file-name'."
       (back-to-indentation)
       (clipboard-kill-ring-save (point) (line-end-position)))))
 
+(defun ecfg-duplicate-line ()
+  "Duplicate current line and change the cursor position to the clone"
+  (interactive)
+  (save-excursion
+    (let ((current-line (thing-at-point 'line)))
+      ;; when on last line, insert a newline first
+      (end-of-line)
+      (when (eq (point) (point-max))
+        (insert "\n"))
+
+      ;; now insert as many time as requested
+      (forward-line 1)
+      (insert current-line)
+      ))
+  (next-line))
+
 (defun ecfg-reformat-text ()
   (defun ecfg--reformat-region (start end)
     (if (> start end)
