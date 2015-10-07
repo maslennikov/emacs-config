@@ -15,7 +15,15 @@
    ;; (setq org-directory "~/Documents/notes")
    ;; (setq org-default-notes-file (expand-file-name "inbox.org.txt" org-directory))
    (global-set-key "\C-cc" 'org-capture)
-   (global-set-key (kbd "<f10>") 'org-clock-in-last)
+
+   ;; clocking time
+   (global-set-key (kbd "<f10>")
+      '(lambda ()
+         (interactive)
+         (let ((current-prefix-arg '(4))) ;; emulate C-u
+           (call-interactively 'org-clock-in-last))))
+
+   (global-set-key (kbd "<M-f10>") 'org-clock-in-last)
    (global-set-key (kbd "<f11>") 'org-clock-out)
 
    (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
