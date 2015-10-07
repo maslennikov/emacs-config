@@ -303,6 +303,15 @@ providing a clue if it IS-DARK theme."
        (helm-separator (:foreground ,red))
        (helm-visible-mark (:background ,bg-base :foreground ,violet :bold t))
 
+;;; helm-css-scss
+       (helm-css-scss-target-line-face (:inherit match))
+       (helm-css-scss-selector-depth-face-1 (:inherit helm-grep-file))
+       (helm-css-scss-selector-depth-face-2 (:inherit helm-grep-file))
+       (helm-css-scss-selector-depth-face-3 (:inherit helm-grep-file))
+       (helm-css-scss-selector-depth-face-4 (:inherit helm-grep-file))
+       (helm-css-scss-selector-depth-face-5 (:inherit helm-grep-file))
+       (helm-css-scss-selector-depth-face-6 (:inherit helm-grep-file))
+
 ;;;; markdown-mode
        (markdown-header-delimiter-face (:foreground ,fg-lc))
        (markdown-header-rule-face (:foreground ,fg-lc))
