@@ -6,13 +6,17 @@
   ;; basic css settings
   (add-hook 'css-mode-hook 'ecfg--css-hook)
 
+  (ecfg-install emmet-mode
+    (autoload 'emmet-mode "emmet-mode" nil t)
+    (add-hook 'css-mode-hook 'emmet-mode))
+
   ;; supporting sass scss syntax
   (ecfg-install scss-mode
    (autoload 'scss-mode "scss-mode" nil t)
    (add-to-list 'auto-mode-alist '("\\.scss$" . scss-mode))
    (add-hook 'scss-mode-hook 'ecfg--scss-hook))
 
-  ;; utilizing helm in bavigating through stylesheet properties
+  ;; utilizing helm in navigating through stylesheet properties
   (ecfg--setup-helm-css-scss)
   )
 ;;;###autoload (ecfg-auto-module "\\.s?css$" css)
@@ -22,7 +26,7 @@
   (setq css-indent-offset 2))
 
 (defun ecfg--scss-hook ()
-  (ecfg--css-hook)
+  ;; the css-mode-hook will be already executed by this moment
   (setq scss-compile-at-save nil))
 
 

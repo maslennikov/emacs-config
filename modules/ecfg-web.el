@@ -2,8 +2,6 @@
 
 ;;;###autoload
 (defun ecfg-web-module-init ()
-  (ecfg-install zencoding-mode
-   (autoload 'zencoding-mode "zencoding-mode" nil t))
 
   (ecfg-install web-mode
    (autoload 'web-mode "web-mode" nil t)
@@ -17,6 +15,11 @@
    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
+   (ecfg-install emmet-mode
+    (autoload 'emmet-mode "emmet-mode" nil t)
+    (add-hook 'sgml-mode-hook 'emmet-mode)
+    (add-hook 'web-mode-hook 'emmet-mode))
+
    (add-hook 'web-mode-hook 'ecfg--web-mode-hook))
   )
 ;;;###autoload (ecfg-auto-module "\\.\\(xml\\|x?html?\\)\\'" web)
@@ -29,7 +32,6 @@
 ;;;###autoload(ecfg-auto-module "\\.djhtml\\'" web)
 
 (defun ecfg--web-mode-hook ()
-  (zencoding-mode 1)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
