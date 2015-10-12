@@ -35,7 +35,10 @@
         (define-key org-mode-map (kbd "<C-tab>") nil)
         (setq org-clock-persist 'history)
         (org-clock-persistence-insinuate)
-        (setq org-clock-idle-time 10)))
+        (setq org-clock-idle-time 10)
+        ;; measuring time always in hours and minutes
+        (setq org-time-clocksum-format
+              '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))))
 
    (add-hook 'org-mode-hook 'ecfg--org-hook)))
 
