@@ -12,10 +12,32 @@
 
 
 (defun ecfg--setup-basic-gui ()
+;;; Disabling unused UI components
   (setq-default inhibit-startup-screen t)
+
+  ;; we don't need menubar (execpt OSX), toolbar nor scrollbar
+  (and (fboundp 'menu-bar-mode)
+       (not (eq system-type 'darwin))
+       (menu-bar-mode -1))
+  (dolist (mode '(tool-bar-mode scroll-bar-mode))
+    (when (fboundp mode) (funcall mode -1)))
+
+;;; Scrolling
+  ;; scroll two lines at a time (less "jumpy" than defaults but still snappy)
+  (setq mouse-wheel-scroll-amount '(2 ((shift) . 1)))
+  ;; don't accelerate scrolling
+  (setq mouse-wheel-progressive-speed nil)
+  ;; scroll window under mouse
+  (setq mouse-wheel-follow-mouse 't)
+  ;; The number of lines to try scrolling a window by when point moves out.
+  ;; Actually I like the default behavior with re-centering of the screen
+  ;; (setq scroll-step 1)
+
+;;; Text-related UI
   (show-paren-mode t)
   (global-hl-line-mode t)
   (column-number-mode t))
+
 
 (defun ecfg--setup-sml-modeline ()
   (ecfg-install sml-modeline
