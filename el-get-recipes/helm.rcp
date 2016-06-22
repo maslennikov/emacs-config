@@ -1,0 +1,20 @@
+(:name helm
+       :description "Emacs incremental completion and narrowing framework"
+       :type github
+       :pkgname "emacs-helm/helm"
+       :autoloads "helm-autoloads"
+       :build (("make"))
+       :build/darwin `(("make" ,(format "EMACS_COMMAND=%s" el-get-emacs)))
+       ;; Windows probably doesn't have make available so we fake it.
+       :build/windows-nt
+       (let ((generated-autoload-file (expand-file-name "helm-autoloads.el")) \
+             (backup-inhibited t))
+         (update-directory-autoloads default-directory)
+         nil)
+
+       ;;disabling automatic loading
+       :features "helm-config"
+       ;;:features nil
+       ;;:post-init (helm-mode)
+       :post-init nil
+)
