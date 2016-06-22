@@ -3,8 +3,10 @@
 ;;;###autoload
 (defun ecfg-javascript-module-init ()
   (ecfg-install js2-mode
-   (autoload 'js2-mode "js2-mode" nil t)
-   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+    (ecfg-with-local-autoloads
+   ;; (autoload 'js2-mode "js2-mode" nil t)
+   ;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+   (add-to-list 'auto-mode-alist '("\\.js$" . js2-jsx-mode))
 
    (eval-after-load 'js2-mode
      '(progn
@@ -22,7 +24,10 @@
 
         (define-key js2-mode-map (kbd "RET") 'js2-line-break)))
 
-   (add-hook 'js2-mode-hook 'ecfg--js-hook)))
+   (add-hook 'js2-mode-hook 'ecfg--js-hook)
+   ;; (add-hook 'js2-jsx-mode-hook #'(lambda ()
+     ;; (setq-local sgml-basic-offset js2-basic-offset)))
+   )))
 
 ;;;###autoload (ecfg-auto-module "\\.js$" javascript)
 
