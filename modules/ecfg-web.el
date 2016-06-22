@@ -14,6 +14,7 @@
    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+   (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
 
    (ecfg-install emmet-mode
     (autoload 'emmet-mode "emmet-mode" nil t)
@@ -30,6 +31,7 @@
 ;;;###autoload(ecfg-auto-module "\\.erb\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.mustache\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.djhtml\\'" web)
+;;;###autoload(ecfg-auto-module "\\.ejs\\'" web)
 
 (defun ecfg--web-mode-hook ()
   (setq web-mode-markup-indent-offset 2)
