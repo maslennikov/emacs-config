@@ -37,6 +37,7 @@
 ;;; Copy, paste, insert
 
   (global-set-key [?\C-z] 'undo)
+  (global-set-key (kbd "s-z") 'undo)
   (global-set-key [?\C-w] 'backward-delete-char)
   (global-set-key [?\M-w] 'backward-kill-word)
 

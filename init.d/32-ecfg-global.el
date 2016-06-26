@@ -245,8 +245,9 @@
          (define-key undo-tree-map (kbd "\C-x u") nil)
 
          (global-set-key (kbd "C-z") 'undo-tree-undo)
+         (global-set-key (kbd "s-z") 'undo-tree-undo)
          (global-set-key (kbd "M-z") 'undo-tree-redo)
-         (global-set-key (kbd "s-z") 'undo-tree-visualize)))
+         (global-set-key (kbd "s-Z") 'undo-tree-visualize)))
 
     (defun ecfg--load-undo-tree-hook ()
       (let ((buffer (buffer-name)))
