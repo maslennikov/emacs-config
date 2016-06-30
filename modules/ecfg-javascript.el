@@ -6,7 +6,7 @@
     (ecfg-with-local-autoloads
    ;; (autoload 'js2-mode "js2-mode" nil t)
    ;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-   (add-to-list 'auto-mode-alist '("\\.js$" . js2-jsx-mode))
+   (add-to-list 'auto-mode-alist '("\\.jsx?$" . js2-jsx-mode))
 
    (eval-after-load 'js2-mode
      '(progn
@@ -30,7 +30,7 @@
      ;; (setq-local sgml-basic-offset js2-basic-offset)))
    )))
 
-;;;###autoload (ecfg-auto-module "\\.js$" javascript)
+;;;###autoload (ecfg-auto-module "\\.jsx?$" javascript)
 
 (defun ecfg--manually-bounce-indent ()
   (interactive)
