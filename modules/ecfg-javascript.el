@@ -20,6 +20,7 @@
          js2-mirror-mode nil
          js2-missing-semi-one-line-override t
          js2-allow-keywords-as-property-names nil
+         js2-strict-missing-semi-warning nil
          js2-pretty-multiline-declarations t)
 
         (define-key js2-mode-map (kbd "RET") 'js2-line-break)))
