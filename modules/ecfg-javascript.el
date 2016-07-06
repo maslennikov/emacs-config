@@ -13,6 +13,7 @@
         (setq
          ;; TODO a lot of new goodies appeared in js2-mode,
          ;; research customize-group
+         js2-basic-offset 2
          js2-cleanup-whitespace t
          js2-auto-indent-p t
          js2-bounce-indent-p nil
@@ -26,8 +27,8 @@
         (define-key js2-mode-map (kbd "RET") 'js2-line-break)))
 
    (add-hook 'js2-mode-hook 'ecfg--js-hook)
-   ;; (add-hook 'js2-jsx-mode-hook #'(lambda ()
-     ;; (setq-local sgml-basic-offset js2-basic-offset)))
+   (add-hook 'js2-jsx-mode-hook #'(lambda ()
+     (setq-local sgml-basic-offset js2-basic-offset)))
    )))
 
 ;;;###autoload (ecfg-auto-module "\\.jsx?$" javascript)
@@ -35,7 +36,7 @@
 (defun ecfg--manually-bounce-indent ()
   (interactive)
   (let ((js2-bounce-indent-p t))
-    (js2-indent-line)))
+    (js2-indent-bounce-backward)))
 
 (defun ecfg--js-hook ()
   ;; (setq ac-sources
@@ -56,5 +57,5 @@
 
   (yas-minor-mode)
   (local-set-key (kbd "C-j") (kbd "<return>"))
-  (local-set-key (kbd "<s-tab>") 'ecfg--manually-bounce-indent)
+  (local-set-key (kbd "<backtab>") 'ecfg--manually-bounce-indent)
   (setq mode-name "JS2"))
