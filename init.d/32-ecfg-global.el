@@ -170,7 +170,7 @@
   (interactive "P")
   (let* ((current-prefix-arg (not non-recursive))
          (helm-current-prefix-arg non-recursive))
-    (call-interactively 'helm-do-grep)))
+    (call-interactively 'helm-do-grep-ag)))
 
 
 (defun ecfg--setup-ido ()
