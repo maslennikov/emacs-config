@@ -1,7 +1,7 @@
 # -*- coding: utf-8; mode: snippet -*-
-# name: write a log message
+# name: console log
 # key: clog
 # group: javascript
 # contributor: Alexy Maslennikov
 # --
-console.log('$1'$2);$0
+console.log('${1:###[DEBUG]###}'$2);$0
