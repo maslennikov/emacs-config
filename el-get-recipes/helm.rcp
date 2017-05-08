@@ -3,8 +3,11 @@
        :type github
        :pkgname "emacs-helm/helm"
        :autoloads "helm-autoloads"
+       :depends (emacs-async)
        :build (("make"))
-       :build/darwin `(("make" ,(format "EMACS_COMMAND=%s" el-get-emacs)))
+       ;; patching make script to substitute ELPA DIR for emacs-async dependency
+       ;; loaddir with el-get's installation (relative to installed helm package dir)
+       :build/darwin `(("make" ,(format "EMACS_COMMAND=%s" el-get-emacs) ,(format "ASYNC_ELPA_DIR=../emacs-async")))
        ;; Windows probably doesn't have make available so we fake it.
        :build/windows-nt
        (let ((generated-autoload-file (expand-file-name "helm-autoloads.el")) \
