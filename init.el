@@ -63,10 +63,12 @@ following regexp: \".*ecfg-\\(.+\\)\.el$\".
 ;;; exports its entry function as an autoload and then via the autoload comment
 ;;; registers itself into the `auto-mode-alist' via `ecfg-auto-module'.
 
-(defmacro ecfg-auto-module (pattern module)
+(defmacro ecfg-auto-module (pattern module &optional registry)
   "Autoload helper for the ecfg-modules. Utilizes the
-auto-mode-alist to trigger the autoload of the module."
-  (let ((init-hook (ecfg-module-init-hook module))
+auto-mode-alist or another passed via `registry` alist to trigger
+the autoload of the module."
+  (let ((registry (or registry 'auto-mode-alist))
+        (init-hook (ecfg-module-init-hook module))
         (auto-hook-name (intern (format "ecfg--auto-module-hook-%s" module))))
 
     `(progn
@@ -76,16 +78,16 @@ auto-mode-alist to trigger the autoload of the module."
 
        ;; defining the auto-module init hook
        (defun ,auto-hook-name ()
-         ;; removing itself from the auto-mode-alist upon the first call
-         (setq auto-mode-alist
-               (rassq-delete-all ',auto-hook-name auto-mode-alist))
+         ;; removing itself from the registry upon the first call
+         (setq ,registry
+               (rassq-delete-all ',auto-hook-name ,registry))
          ;; running the module init-hook triggering the module autoload
          (,init-hook)
          ;; hoping that in hook the proper auto-mode alist entry was inserted
          (set-auto-mode))
 
        ;; registering the auto-module hook to the aut-mode alist
-       (add-to-list 'auto-mode-alist '(,pattern . ,auto-hook-name)))))
+       (add-to-list ',registry '(,pattern . ,auto-hook-name)))))
 
 
 ;;; load all modules for the first time triggering el-get to install all stuff
