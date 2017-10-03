@@ -22,8 +22,9 @@
     (add-hook 'sgml-mode-hook 'emmet-mode)
     (add-hook 'web-mode-hook 'emmet-mode))
 
-   (add-hook 'web-mode-hook 'ecfg--web-mode-hook))
-  )
+   (add-hook 'web-mode-hook 'ecfg--web-mode-hook)
+   (add-hook 'emmet-mode-hook 'ecfg--emmet-mode-hook)
+  ))
 ;;;###autoload (ecfg-auto-module "\\.\\(xml\\|x?html?\\)\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.phtml\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.tpl\\.php\\'" web)
@@ -39,4 +40,13 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-enable-current-column-highlight t)
-  (setq web-mode-enable-current-element-highlight t))
+  (setq web-mode-enable-current-element-highlight t)
+
+  (define-key web-mode-map (kbd "M-p") 'web-mode-element-previous)
+  (define-key web-mode-map (kbd "M-n") 'web-mode-element-next)
+  (define-key web-mode-map (kbd "M-a") 'web-mode-element-beginning)
+  (define-key web-mode-map (kbd "M-e") 'web-mode-element-end)
+  )
+
+(defun ecfg--emmet-mode-hook ()
+  )
