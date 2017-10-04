@@ -112,9 +112,7 @@
 ;;; Unbinding and aborting
 
   (global-set-key (kbd "<escape>") 'keyboard-quit)
-  ;; (global-set-key (kbd "C-q") 'keyboard-quit)
   (define-key minibuffer-local-map (kbd "<escape>") 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-map (kbd "C-q") 'minibuffer-keyboard-quit)
 
   (global-unset-key (kbd "s-m"))        ;on mac runs iconify-frame
   (global-unset-key (kbd "s-q"))        ;on mac runs kill-emacs
