@@ -48,7 +48,9 @@
   (global-set-key "\M-v" 'yank-pop)
   ;; (global-set-key "\C-\M-v" 'popup-yank-menu)
 
+  ;; replacing quoted-insert from C-q to some cheaper keyboard real estate
   (global-set-key (kbd "s-i") 'quoted-insert)
+  (define-key isearch-mode-map (kbd "s-i") 'isearch-quote-char)
 
   (global-set-key (kbd "C-/") 'ecfg-toggle-comment-on-lines)
   (global-set-key (kbd "C-?") 'ecfg-toggle-comment)
