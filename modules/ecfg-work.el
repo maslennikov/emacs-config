@@ -20,7 +20,10 @@
        (add-to-list 'grep-find-ignored-directories "bower_components")
        (add-to-list 'grep-find-ignored-directories "uploads")
 
-       (add-to-list 'grep-find-ignored-files "*.min.js")))
+       (add-to-list 'grep-find-ignored-files "*.min.js")
+       (add-to-list 'grep-find-ignored-files "*.min.css")
+       (add-to-list 'grep-find-ignored-files "*.svg")
+       ))
 
   (eval-after-load "projectile"
     '(progn
