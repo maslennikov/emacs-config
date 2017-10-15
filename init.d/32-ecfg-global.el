@@ -131,6 +131,7 @@
       (eval-after-load "helm-ag"
         '(progn
            (setq helm-ag-use-grep-ignore-list t)
+           (setq helm-ag-insert-at-point 'symbol)
            ))
       )
      ))
