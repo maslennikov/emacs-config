@@ -8,7 +8,7 @@
 
    (add-to-list 'auto-mode-alist '("\\.\\(xml\\|x?html?\\)\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-   (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+   (add-to-list 'auto-mode-alist '("\\.\\(tpl\\|tpl\\.php\\)\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
@@ -27,7 +27,7 @@
   ))
 ;;;###autoload (ecfg-auto-module "\\.\\(xml\\|x?html?\\)\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.phtml\\'" web)
-;;;###autoload(ecfg-auto-module "\\.tpl\\.php\\'" web)
+;;;###autoload(ecfg-auto-module "\\.\\(tpl\\|tpl\\.php\\)\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.[agj]sp\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.as[cp]x\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.erb\\'" web)
