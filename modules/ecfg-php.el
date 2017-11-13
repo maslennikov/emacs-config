@@ -13,4 +13,4 @@
 
 (defun ecfg--php-hook ()
 
-  )
+  (add-hook 'post-self-insert-hook 'ecfg-two-dots nil t))
