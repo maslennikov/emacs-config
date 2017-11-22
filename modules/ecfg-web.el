@@ -14,6 +14,7 @@
    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
+   (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
    ;; exclude mustashe since it's markup-agnostic and doesn't mean web markup
    ;; (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
@@ -33,6 +34,7 @@
 ;;;###autoload(ecfg-auto-module "\\.erb\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.djhtml\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.ejs\\'" web)
+;;;###autoload(ecfg-auto-module "\\.twig\\'" web)
 ;; ;;;###autoload(ecfg-auto-module "\\.mustache\\'" web)
 
 (defun ecfg--web-mode-hook ()
