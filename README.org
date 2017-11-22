@@ -173,13 +173,15 @@ The new package installacion should be accompanied by the following reasoning:
    invocation of a single command (e.g. via s shortcut), then it'll make sense
    to write a single =(autoload ...)= statement in the init hook of your
    =ecfg-install=. If there are multiple entry points to the package (like with
-   =helm=), id would be sensible to read =loaddefs= for the whole package during
+   =helm=), it would be sensible to read =loaddefs= for the whole package during
    the init. The usage of package-isolated autoloads is facilitated by
    =ecfg-with-local-autoloads= macro.
 
 
 
 * Known issues
+
+After updating your =modules=, remember to remove =ecfg-user-dir/loaddefs.el=.
 
 While experimenting with =el-get=, =el-get-bundle=, and recipes, be sure to
 remember about the cached stuff:
