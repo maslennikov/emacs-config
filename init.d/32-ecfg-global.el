@@ -174,6 +174,8 @@
    ;; limiting the window height (works with autoresize-mode)
    helm-autoresize-max-height 35
    helm-autoresize-min-height 35
+   ;; using default command except colors switched off
+   helm-grep-ag-command "ag --line-numbers -S --hidden --nocolor --nogroup %s %s %s"
    )
 
   )
