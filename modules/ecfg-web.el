@@ -38,16 +38,25 @@
 ;; ;;;###autoload(ecfg-auto-module "\\.mustache\\'" web)
 
 (defun ecfg--web-mode-hook ()
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-enable-current-column-highlight t)
-  (setq web-mode-enable-current-element-highlight t)
+  (setq
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-enable-current-column-highlight t
+   web-mode-enable-current-element-highlight t
+   ; we will teach electric-pairs to do this
+   web-mode-enable-auto-pairing nil
+   )
+
+  (setq-local
+   ; not appending to electric-pair-text-pairs
+   electric-pair-pairs (append electric-pair-pairs '((?% . ?%))))
 
   (define-key web-mode-map (kbd "M-p") 'web-mode-element-previous)
   (define-key web-mode-map (kbd "M-n") 'web-mode-element-next)
   (define-key web-mode-map (kbd "M-a") 'web-mode-element-beginning)
   (define-key web-mode-map (kbd "M-e") 'web-mode-element-end)
+
   )
 
 (defun ecfg--emmet-mode-hook ()

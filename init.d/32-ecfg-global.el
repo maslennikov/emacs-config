@@ -219,11 +219,7 @@
 
 (defun ecfg--setup-autopair ()
   ;; todo: look at cua mode?
-  (ecfg-install autopair
-      (autopair-global-mode)
-      (setq autopair-blink nil)
-      (setq autopair-pair-criteria 'always)
-      (setq autopair-skip-whitespace 'chomp)))
+  (electric-pair-mode t))
 
 
 (defun ecfg--setup-recentf ()
