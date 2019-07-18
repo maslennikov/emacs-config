@@ -98,12 +98,11 @@
 
 
 (defun ecfg--setup-yasnippet ()
-  ;; todo: see how yasnippet in OME is set-up
   (ecfg-install yasnippet
    (autoload 'yas-minor-mode "yasnippet" "turns yasnippet minor mode on" t)
    (eval-after-load "yasnippet"
      '(progn
-        (setq yas-snippet-dirs (expand-file-name "snippets" ecfg-dir))
+        (setq yas-snippet-dirs `(,(expand-file-name "snippets" ecfg-dir)))
         (yas-reload-all)))))
 
 
