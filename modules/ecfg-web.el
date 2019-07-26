@@ -15,6 +15,7 @@
    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.ejs\\'" . web-mode))
    (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
+   (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
    ;; exclude mustashe since it's markup-agnostic and doesn't mean web markup
    ;; (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 
@@ -35,6 +36,7 @@
 ;;;###autoload(ecfg-auto-module "\\.djhtml\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.ejs\\'" web)
 ;;;###autoload(ecfg-auto-module "\\.twig\\'" web)
+;;;###autoload(ecfg-auto-module "\\.jsx$" web)
 ;; ;;;###autoload(ecfg-auto-module "\\.mustache\\'" web)
 
 (defun ecfg--web-mode-hook ()
@@ -46,11 +48,15 @@
    web-mode-enable-current-element-highlight t
    ; we will teach electric-pairs to do this
    web-mode-enable-auto-pairing nil
+   web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))
    )
 
   (setq-local
    ; not appending to electric-pair-text-pairs
    electric-pair-pairs (append electric-pair-pairs '((?% . ?%))))
+
+  (ecfg-javascript-module-init)
+  (js2-minor-mode)
 
   (define-key web-mode-map (kbd "M-p") 'web-mode-element-previous)
   (define-key web-mode-map (kbd "M-n") 'web-mode-element-next)
