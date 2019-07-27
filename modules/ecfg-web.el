@@ -55,8 +55,11 @@
    ; not appending to electric-pair-text-pairs
    electric-pair-pairs (append electric-pair-pairs '((?% . ?%))))
 
-  (ecfg-javascript-module-init)
-  (js2-minor-mode)
+  (if (equalp (file-name-extension (or (buffer-file-name) (buffer-name))) "jsx")
+      (progn
+        (ecfg-javascript-module-init)
+        (js2-minor-mode)
+        ))
 
   (define-key web-mode-map (kbd "M-p") 'web-mode-element-previous)
   (define-key web-mode-map (kbd "M-n") 'web-mode-element-next)
